@@ -10,6 +10,7 @@
   min-height: 300px;
   display: flex;
   flex-direction: column;
+  padding-bottom: 30px;
 }
 
 .venue-card .card {
@@ -21,4 +22,8 @@
 .venue-card .card-body {
   flex-grow: 1;
   overflow: hidden;
+}
+
+div.jumbotron {
+  text-align: center;
 }
