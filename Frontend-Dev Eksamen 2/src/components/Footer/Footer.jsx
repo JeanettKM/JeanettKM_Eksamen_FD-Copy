@@ -44,7 +44,7 @@ const Footer = () => {
     <footer className="py-3 my-4">
       <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li>
-          <Link to="/venues" className="nav-link px-2 link-secondary">
+          <Link to="/venues" className="nav-link px-2 text-primary">
             Venues
           </Link>
         </li>

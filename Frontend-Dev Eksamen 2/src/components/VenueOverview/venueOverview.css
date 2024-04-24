@@ -60,3 +60,10 @@ div.jumbotron {
 .venue-card {
   border: 0.5px solid var(--secondary-color);
 }
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 70%;
+    margin: 0 auto; /* Center the container */
+  }
+}

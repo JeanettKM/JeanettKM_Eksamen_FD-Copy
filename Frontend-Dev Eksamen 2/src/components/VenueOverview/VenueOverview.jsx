@@ -112,7 +112,7 @@ const VenueOverview = () => {
     <div className="bg-color">
       <div className="jumbotron">
         <h1 className="display-4">Check our Venues</h1>
-        <p className="lead">
+        <p className="lead text-secondary">
           Can you find the perfect venue for your next event?
         </p>
         <hr className="my-4" />

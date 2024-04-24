@@ -1,4 +1,12 @@
-.border-bottom {
-  border-bottom: 1px solid var(--secondary-color);
-  border-color: var(--secondary-color);
+/* Custom CSS for centering navbar items on small screens */
+@media (max-width: 991.98px) {
+  /* Bootstrap's breakpoint for small screens */
+  .d-flex {
+    justify-content: center;
+  }
+
+  .me-auto {
+    margin-right: auto;
+    margin-left: 20px;
+  }
 }

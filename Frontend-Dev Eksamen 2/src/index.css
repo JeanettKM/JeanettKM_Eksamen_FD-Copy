@@ -5,14 +5,14 @@ body {
   color: var(--secondary-color);
 }
 
-:root {
+/* :root {
   --primary-color: #fff8f0;
   --secondary-color: #b14b59;
   --third-color: #d7a46f;
   --text-color: #845158;
-}
+} */
 
-/* Update Bootstrap components to use custom colors */
+/* Update Bootstrap components to use custom colors
 .btn-primary {
   background-color: var(--secondary-color);
   border-color: var(--secondary-color);
@@ -69,4 +69,4 @@ footer.a {
 .nav:hover {
   color: var(--third-color);
   text-decoration: underline;
-}
+} */
