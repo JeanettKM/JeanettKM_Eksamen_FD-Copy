@@ -1,0 +1,4 @@
+.border-bottom {
+  border-bottom: 1px solid var(--secondary-color);
+  border-color: var(--secondary-color);
+}

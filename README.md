@@ -8,3 +8,5 @@ https://trello.com/b/8AUR0zr9/jeanett-k-melsom-exam-project-planner
 Deployed with Netlify
 
 Link: https://jkm-dev-finals.netlify.app/
+
+https://huemint.com/website-1/#palette=fff2e4-b14b59-d7a46f
