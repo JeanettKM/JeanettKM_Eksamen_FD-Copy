@@ -5,7 +5,6 @@ import UserPage from "../UserPage/UserPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import VenueOverview from "../VenueOverview/VenueOverview";
 import CartPage from "../CartPage/CartPage";
-import Footer from "../Footer/Footer";
 import Orders from "../Orders/Orders";
 import VenueDetail from "../VenueDetail/VenueDetail";
 import ContactUs from "../ContactUsPage/ContactUs";
@@ -13,8 +12,8 @@ import ContactUs from "../ContactUsPage/ContactUs";
 function Routing() {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/user" element={<UserPage />} />
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/suser" element={<UserPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/venues" element={<VenueOverview />} />
       {/* Define the nested route for VenueDetail */}
