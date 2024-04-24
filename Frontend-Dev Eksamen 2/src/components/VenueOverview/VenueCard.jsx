@@ -10,7 +10,7 @@ function VenueCard({ venue }) {
   const firstImageAlt = venue.media?.[0]?.alt ?? "Default alt text";
 
   const handleReadMore = () => {
-    navigate(`/venue-detail/${venue.id}`);
+    navigate(`/venues/${venue.id}`);
   };
 
   return (

@@ -7,15 +7,7 @@ const Header = () => {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <svg
-            className="bi"
-            width="40"
-            height="32"
-            role="img"
-            aria-label="Bootstrap"
-          >
-            <use xlinkHref="#bootstrap"></use>
-          </svg>
+          <p>Holidaze</p>
         </Link>
         <button
           className="navbar-toggler"
@@ -47,7 +39,7 @@ const Header = () => {
             </li>
           </ul>
           <div className="d-flex">
-            <Link to="/login" className="btn btn-outline-primary me-2 btn-sm">
+            <Link to="/" className="btn btn-outline-primary me-2 btn-sm">
               Login
             </Link>
             <Link to="/register" className="btn btn-primary btn-sm">

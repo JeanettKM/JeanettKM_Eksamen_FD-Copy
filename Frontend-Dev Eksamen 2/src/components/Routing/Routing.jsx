@@ -8,6 +8,7 @@ import CartPage from "../CartPage/CartPage";
 import Orders from "../Orders/Orders";
 import VenueDetail from "../VenueDetail/VenueDetail";
 import ContactUs from "../ContactUsPage/ContactUs";
+import Footer from "../Footer/Footer";
 
 function Routing() {
   return (

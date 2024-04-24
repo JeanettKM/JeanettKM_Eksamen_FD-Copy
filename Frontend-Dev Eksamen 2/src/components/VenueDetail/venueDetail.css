@@ -4,3 +4,19 @@
     margin: 0 auto;
   }
 }
+
+#venue-image {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+
+#venue-div {
+  margin: 0 auto;
+  max-width: 400px;
+  margin-bottom: 50px;
+}
+
+.detailsText {
+  text-align: start;
+}

@@ -1,6 +1,4 @@
-/* Custom CSS for centering navbar items on small screens */
 @media (max-width: 991.98px) {
-  /* Bootstrap's breakpoint for small screens */
   .d-flex {
     justify-content: center;
   }
@@ -9,4 +7,11 @@
     margin-right: auto;
     margin-left: 20px;
   }
+}
+
+.navbar-brand p {
+  margin-left: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 0px;
+  margin-right: 30px;
 }
