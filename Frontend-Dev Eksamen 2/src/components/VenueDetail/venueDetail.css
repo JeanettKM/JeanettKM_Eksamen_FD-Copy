@@ -20,6 +20,7 @@
 
 .detailsText {
   text-align: start;
+  font-size: 13px;
 }
 
 Card.Title {
@@ -29,4 +30,15 @@ Card.Title {
 .text-center {
   margin: 30px auto;
   max-width: 60%;
+}
+
+#VenueFeatures {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#VenueCounter {
+  margin-top: 10px;
+  text-align: center;
 }

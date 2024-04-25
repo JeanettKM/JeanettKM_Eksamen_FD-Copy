@@ -2,12 +2,6 @@ button {
   margin: 20px;
 }
 
-/* .form-control {
-  display: block;
-  width: 50%;
-  margin: auto;
-} */
-
-.form-control {
-  border: 0.5px solid var(--secondary-color);
+.btn {
+  border-radius: 2px;
 }

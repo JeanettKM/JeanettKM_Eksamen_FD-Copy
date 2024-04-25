@@ -10,8 +10,10 @@ const VenueDetail = () => {
   const [venue, setVenue] = useState(null);
 
   useEffect(() => {
-    FetchAPI(`venues/${id}`).then((data) => {
+    // Modify FetchAPI to accept query parameters
+    FetchAPI(`venues/${id}`, { _owner: true, _bookings: true }).then((data) => {
       if (data && data.data) {
+        console.log("Venue data:", data.data); // Add this line
         setVenue(data.data);
       } else {
         console.error("Invalid data received:", data);
@@ -40,6 +42,21 @@ const VenueDetail = () => {
           <p>
             Location: {venue.location.city}, {venue.location.country}
           </p>
+          <hr className="my-4" />
+          <div id="VenueFeatures" className="row">
+            <div className="col-md-6">
+              <p>Wifi: {venue.meta.wifi ? "Yes" : "No"}</p>
+              <p>Breakfast: {venue.meta.breakfast ? "Yes" : "No"}</p>
+            </div>
+            <div className="col-md-6">
+              <p>Pets: {venue.meta.pets ? "Yes" : "No"}</p>
+              <p>Parking: {venue.meta.parking ? "Yes" : "No"}</p>
+            </div>
+          </div>
+          <hr className="my-4" />
+          <div id="VenueCounter">
+            <p>Number of Bookings: {venue._count.bookings}</p>
+          </div>
         </div>
         <Button variant="primary">Book Now</Button>
       </Card.Body>

@@ -20,4 +20,27 @@
 
 button {
   margin: 15px;
+  border-radius: 2px;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.btn {
+  border-radius: 2px;
+}
+
+.text-muted {
+  padding-top: 10px;
+}
+
+.venue-card,
+.text-center {
+  border-radius: 3px;
+}
+
+.card-img-top,
+.card-header {
+  border-radius: 3px 3px 0 0;
 }

@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   margin: 5px;
-  min-height: 300px; /* Minimum height for the card */
+  min-height: 200px; /* Minimum height for the card */
   padding-bottom: 30px; /* Extra bottom padding to accommodate the button */
 }
 
@@ -57,13 +57,15 @@ div.jumbotron {
   color: var(--text-color);
 }
 
-.venue-card {
-  border: 0.5px solid var(--secondary-color);
-}
-
 @media (min-width: 992px) {
   .container {
-    max-width: 70%;
+    max-width: 80%;
     margin: 0 auto; /* Center the container */
   }
+}
+
+#VenueFeatures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
