@@ -4,7 +4,7 @@ import "../Header/header.css";
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar sticky-top navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <p>Holidaze</p>
@@ -43,7 +43,7 @@ const Header = () => {
               Login
             </Link>
             <Link to="/register" className="btn btn-primary btn-sm">
-              Sign-up
+              Register
             </Link>
           </div>
         </div>

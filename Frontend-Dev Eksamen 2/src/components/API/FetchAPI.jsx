@@ -1,6 +1,6 @@
 // FetchAPI.jsx
 const FetchAPI = (endpoint) => {
-  const baseUrl = "https://v2.api.noroff.dev/holidaze"; // Set your base URL here
+  const baseUrl = "https://v2.api.noroff.dev/holidaze"; // Base URL for the API
 
   return fetch(`${baseUrl}/${endpoint}`)
     .then((response) => {

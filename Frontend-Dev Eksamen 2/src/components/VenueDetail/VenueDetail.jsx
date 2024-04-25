@@ -10,10 +10,9 @@ const VenueDetail = () => {
   const [venue, setVenue] = useState(null);
 
   useEffect(() => {
-    // Modify FetchAPI to accept query parameters
     FetchAPI(`venues/${id}`, { _owner: true, _bookings: true }).then((data) => {
       if (data && data.data) {
-        console.log("Venue data:", data.data); // Add this line
+        console.log("Venue data:", data.data);
         setVenue(data.data);
       } else {
         console.error("Invalid data received:", data);

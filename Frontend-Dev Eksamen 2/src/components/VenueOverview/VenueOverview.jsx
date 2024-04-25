@@ -47,7 +47,6 @@ const VenueOverview = () => {
             {displayedVenues.map((venue) => (
               <Col key={venue.id} xs={12}>
                 {" "}
-                {/* Set xs={12} for full width on extra-small screens */}
                 <VenueCard venue={venue} />
               </Col>
             ))}
