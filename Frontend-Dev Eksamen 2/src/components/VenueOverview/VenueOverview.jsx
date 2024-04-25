@@ -10,7 +10,7 @@ const VenueOverview = () => {
   const [venues, setVenues] = useState([]);
   const [displayedVenues, setDisplayedVenues] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
 
   useEffect(() => {
     FetchAPI("venues").then((data) => {
@@ -42,7 +42,7 @@ const VenueOverview = () => {
           Can you find the perfect venue for your next event?
         </p>
         <hr className="my-4" />
-        <Container>
+        <Container className="VenueContainer">
           <Row xs={1} md={2} lg={3} className="g-4">
             {displayedVenues.map((venue) => (
               <Col key={venue.id} xs={12}>

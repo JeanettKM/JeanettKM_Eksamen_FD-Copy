@@ -27,8 +27,7 @@ function VenueCard({ venue }) {
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item>
-          Location: {venue.location.address}, {venue.location.city},{" "}
-          {venue.location.country}
+          Location: {venue.location.city}, {venue.location.country}
         </ListGroup.Item>
         <ListGroup.Item>Rated: {venue.rating}</ListGroup.Item>
         <ListGroup.Item>Price: {venue.price}</ListGroup.Item>

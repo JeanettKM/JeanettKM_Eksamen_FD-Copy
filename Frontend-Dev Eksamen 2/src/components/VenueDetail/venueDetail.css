@@ -1,6 +1,6 @@
 @media (min-width: 992px) {
   .card {
-    max-width: 70%;
+    max-width: 80%;
     margin: 0 auto;
   }
 }
@@ -9,6 +9,7 @@
   width: 100%;
   height: auto;
   border-radius: 2px;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }
 
 #venue-div {
@@ -20,7 +21,7 @@
 
 .detailsText {
   text-align: start;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 Card.Title {
