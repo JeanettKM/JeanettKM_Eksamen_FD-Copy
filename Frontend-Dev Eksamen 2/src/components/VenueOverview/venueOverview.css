@@ -57,6 +57,12 @@ div.jumbotron {
   color: var(--text-color);
 }
 
+#VenueFeatures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 @media (min-width: 992px) {
   .container {
     max-width: 80%;
@@ -64,8 +70,8 @@ div.jumbotron {
   }
 }
 
-#VenueFeatures {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+@media (max-width: 400px) {
+  .jumbotron {
+    padding: 2px;
+  }
 }

@@ -44,9 +44,10 @@ const VenueOverview = () => {
         <hr className="my-4" />
         <Container>
           <Row xs={1} md={2} lg={3} className="g-4">
-            {" "}
             {displayedVenues.map((venue) => (
-              <Col key={venue.id}>
+              <Col key={venue.id} xs={12}>
+                {" "}
+                {/* Set xs={12} for full width on extra-small screens */}
                 <VenueCard venue={venue} />
               </Col>
             ))}
