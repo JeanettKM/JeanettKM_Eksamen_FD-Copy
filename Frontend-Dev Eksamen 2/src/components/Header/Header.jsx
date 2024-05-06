@@ -3,6 +3,16 @@ import { Link } from "react-router-dom";
 import "../Header/header.css";
 
 const Header = () => {
+  const handleLogout = () => {
+    // Clear all stored data in local storage
+    localStorage.clear();
+    // Reload the page
+    window.location.reload();
+  };
+
+  // Check if user is logged in by checking if accessToken exists in local storage
+  const isLoggedIn = localStorage.getItem("accessToken") !== null;
+
   return (
     <nav className="navbar sticky-top navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -28,9 +38,11 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/user">
-                Your Profile
-              </Link>
+              {isLoggedIn && (
+                <Link className="nav-link" to="/user">
+                  Your Profile
+                </Link>
+              )}
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/contact">
@@ -39,10 +51,23 @@ const Header = () => {
             </li>
           </ul>
           <div className="d-flex">
-            <Link to="/" className="btn btn-outline-primary me-2 btn-sm">
-              Login
-            </Link>
-            <Link to="/register" className="btn btn-primary btn-sm">
+            {isLoggedIn ? (
+              <button
+                className="btn btn-outline-primary me-2 btn-sm"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            ) : (
+              <Link to="/login" className="btn btn-outline-primary me-2 btn-sm">
+                Login
+              </Link>
+            )}
+            <Link
+              to="/register"
+              id="registerBtn"
+              className={`btn btn-primary btn-sm ${isLoggedIn ? "d-none" : ""}`}
+            >
               Register
             </Link>
           </div>
