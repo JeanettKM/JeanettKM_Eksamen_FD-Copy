@@ -7,14 +7,41 @@ import { loginUser, createApiKey } from "../API/AuthAPI";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [apiError, setApiError] = useState("");
 
   const handleLogin = async () => {
     try {
+      // Reset previous error messages
+      setEmailError("");
+      setPasswordError("");
+      setApiError("");
+
+      // Validate email
+      if (!email) {
+        setEmailError("Email is required");
+        return;
+      }
+
+      // Validate password
+      if (!password) {
+        setPasswordError("Password is required");
+        return;
+      }
+
       // Call loginUser function to log in user
       const response = await loginUser(email, password);
+      console.log("Login API Response:", response); // Log the API response
+
+      // Check if the response contains user data
       if (response && response.data && response.data.accessToken) {
         // Save access token to local storage
         localStorage.setItem("accessToken", response.data.accessToken);
+
+        // Save user data to local storage
+        localStorage.setItem("name", response.data.name);
+        localStorage.setItem("email", response.data.email);
 
         // If login successful, create API key
         const apiKeyResponse = await createApiKey(response.data.accessToken);
@@ -23,8 +50,14 @@ const LoginForm = () => {
           localStorage.setItem("apiKey", apiKeyResponse.data.key);
         }
 
+        // Log login success
+        console.log("Login successful!");
+
         // Redirect to venues page or perform any other action after successful login
         window.location.href = "/venues";
+      } else if (response && response.errors && response.errors.length > 0) {
+        // Set API error message if present
+        setApiError(response.errors[0].message);
       } else {
         console.error("Login failed:", response);
       }
@@ -45,6 +78,9 @@ const LoginForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            {emailError && (
+              <Form.Text className="text-danger">{emailError}</Form.Text>
+            )}
           </Form.Group>
           <br />
 
@@ -55,11 +91,17 @@ const LoginForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {passwordError && (
+              <Form.Text className="text-danger">{passwordError}</Form.Text>
+            )}
           </Form.Group>
           <Form.Group
             className="sm-3"
             controlId="formBasicCheckbox"
           ></Form.Group>
+          {apiError && (
+            <Form.Text className="text-danger">{apiError}</Form.Text>
+          )}
           <Form.Text className="text-muted">
             We'll never share your information with anyone else.
           </Form.Text>
