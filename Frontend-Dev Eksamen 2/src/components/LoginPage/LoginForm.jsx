@@ -18,21 +18,21 @@ const LoginForm = () => {
       setPasswordError("");
       setApiError("");
 
-      // Validate email
+      // Validate input email
       if (!email) {
         setEmailError("Email is required");
         return;
       }
 
-      // Validate password
+      // Validate input password
       if (!password) {
         setPasswordError("Password is required");
         return;
       }
 
-      // Call loginUser function to log in user
+      // Call the loginUser function to log in user
       const response = await loginUser(email, password);
-      console.log("Login API Response:", response); // Log the API response
+      console.log("Login API Response:", response); // Log the API response for debugging
 
       // Check if the response contains user data
       if (response && response.data && response.data.accessToken) {
@@ -50,13 +50,13 @@ const LoginForm = () => {
           localStorage.setItem("apiKey", apiKeyResponse.data.key);
         }
 
-        // Log login success
+        // Console log login success
         console.log("Login successful!");
 
-        // Redirect to venues page or perform any other action after successful login
+        // Redirect to venues page after successful login - CHANGE THIS TO USER PAGE WHEN ITS CREATED
         window.location.href = "/venues";
       } else if (response && response.errors && response.errors.length > 0) {
-        // Set API error message if present
+        // Display API error message if any errors are present
         setApiError(response.errors[0].message);
       } else {
         console.error("Login failed:", response);

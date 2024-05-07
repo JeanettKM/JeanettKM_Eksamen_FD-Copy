@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
-import { registerUser } from "../API/AuthAPI"; // Import the registerUser function
+import { registerUser } from "../API/AuthAPI";
 
 const RegisterForm = () => {
-  const [name, setName] = useState(""); // State for name input field
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nameError, setNameError] = useState("");
@@ -23,19 +23,19 @@ const RegisterForm = () => {
       setPasswordError("");
       setApiError("");
 
-      // Validate name
+      // Validate input name
       if (!name) {
         setNameError("Name is required");
         return;
       }
 
-      // Validate email
+      // Validate input email
       if (!email) {
         setEmailError("Email is required");
         return;
       }
 
-      // Validate password
+      // Validate input password
       if (!password) {
         setPasswordError("Password is required");
         return;
@@ -48,10 +48,10 @@ const RegisterForm = () => {
       // Check if registration was successful
       if (response && response.data && response.data.email) {
         console.log("Registration successful!");
-        // Redirect to venues page or perform any other action after successful registration
+        // Redirect to venues page after successful registration - CHANGE THIS TO USER PAGE WHEN ITS CREATED
         window.location.href = "/venues";
       } else if (response && response.errors && response.errors.length > 0) {
-        // Set API error message if present
+        // Display API error message if any errors are present
         setApiError(response.errors[0].message);
       } else {
         console.error("Registration failed:", response);
@@ -71,7 +71,7 @@ const RegisterForm = () => {
               placeholder="Enter name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required // Add required attribute for form validation
+              required
             />
             {nameError && (
               <Form.Text className="text-danger">{nameError}</Form.Text>
@@ -85,7 +85,7 @@ const RegisterForm = () => {
               placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required // Add required attribute for form validation
+              required
             />
             {emailError && (
               <Form.Text className="text-danger">{emailError}</Form.Text>
@@ -99,7 +99,7 @@ const RegisterForm = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required // Add required attribute for form validation
+              required
             />
             {passwordError && (
               <Form.Text className="text-danger">{passwordError}</Form.Text>

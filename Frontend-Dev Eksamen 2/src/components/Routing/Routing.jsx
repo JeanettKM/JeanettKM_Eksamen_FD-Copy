@@ -18,7 +18,7 @@ function Routing() {
       <Route path="/suser" element={<UserPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/venues" element={<VenueOverview />} />
-      {/* Define the nested route for VenueDetail */}
+      {/* Nested route for VenueDetail */}
       <Route path="/venues/:id" element={<VenueDetail />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/orders" element={<Orders />} />

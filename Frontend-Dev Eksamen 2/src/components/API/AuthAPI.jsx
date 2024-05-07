@@ -12,6 +12,16 @@ export const registerUser = async (userData) => {
       body: JSON.stringify(userData),
     });
     const data = await response.json();
+
+    // Check if registration was successful
+    if (response.ok) {
+      // ConsoleLog registration success
+      console.log("Registration successful!");
+    } else {
+      // ConsoleLog registration failure
+      console.error("Registration failed:", data);
+    }
+
     return data;
   } catch (error) {
     console.error("Registration failed:", error);
@@ -26,7 +36,6 @@ export const loginUser = async (
   includeOptionalProperties = false
 ) => {
   try {
-    // Construct the URL with the query parameter if necessary
     const url = includeOptionalProperties
       ? `${API_BASE_URL}/auth/login?_holidaze=true`
       : `${API_BASE_URL}/auth/login`;

@@ -66,6 +66,7 @@ const Header = () => {
             <Link
               to="/register"
               id="registerBtn"
+              // Hide Register button if user is logged in
               className={`btn btn-primary btn-sm ${isLoggedIn ? "d-none" : ""}`}
             >
               Register

@@ -5,26 +5,20 @@ const FetchAPI = (endpoint) => {
 
   return fetch(`${baseUrl}/${endpoint}`)
     .then((response) => {
-      console.log("Response status:", response.status); // Log response status
-      console.log("Response headers:", response.headers); // Log response headers
-
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error(
+          `Network response was not ok. Status: ${response.status}, Status Text: ${response.statusText}`
+        );
       }
       return response.json();
     })
     .then((data) => {
-      console.log("Data fetched:", data); // Log fetched data
       return data;
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
       return null;
     });
-};
-
-export const getUserProfile = async () => {
-  return FetchAPI("profiles");
 };
 
 export default FetchAPI;
