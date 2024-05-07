@@ -20,6 +20,34 @@
 .navbar-toggler {
   border: none;
 }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* darkened background */
+  backdrop-filter: blur(5px); /* Blur */
+  z-index: 9998; /* making sure the overlay is behind the popup*/
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 30px;
+  z-index: 9999; /* To get the popup to be above the overlay */
+}
+
+.breadcrumbs {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
 /* Venue Detail Styles */
 @media (min-width: 992px) {
@@ -206,6 +234,12 @@ button,
   .container {
     max-width: 900px;
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .breadcrumbs {
+    display: none;
   }
 }
 

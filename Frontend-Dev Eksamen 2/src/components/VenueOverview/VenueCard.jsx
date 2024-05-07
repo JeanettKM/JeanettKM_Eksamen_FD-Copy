@@ -26,14 +26,17 @@ function VenueCard({ venue }) {
         alt={firstImageAlt}
         className="card-img-top"
       />
-      <Card.Body>
+      <Card.Body style={{ height: "100px", overflow: "hidden" }}>
         {/* Displaying the name of the venue */}
         <Card.Title>{venue.name}</Card.Title>
         {/* Displaying the description of the venue */}
         <Card.Text className="card-text">{venue.description}</Card.Text>
       </Card.Body>
       {/* Displaying venue details in a list */}
-      <ListGroup className="list-group-flush">
+      <ListGroup
+        className="list-group-flush "
+        style={{ height: "150px", overflow: "hidden" }}
+      >
         <ListGroup.Item>
           Location: {venue.location.city}, {venue.location.country}
         </ListGroup.Item>

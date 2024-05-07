@@ -1,7 +1,9 @@
+// RegisterForm.jsx
+
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../API/AuthAPI";
 
 const RegisterForm = () => {
@@ -12,6 +14,8 @@ const RegisterForm = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [apiError, setApiError] = useState("");
+  const [registered, setRegistered] = useState(false); // New state to track registration status
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -48,8 +52,8 @@ const RegisterForm = () => {
       // Check if registration was successful
       if (response && response.data && response.data.email) {
         console.log("Registration successful!");
-        // Redirect to venues page after successful registration - CHANGE THIS TO USER PAGE WHEN ITS CREATED
-        window.location.href = "/venues";
+        // Set registered state to true to display the popup
+        setRegistered(true);
       } else if (response && response.errors && response.errors.length > 0) {
         // Display API error message if any errors are present
         setApiError(response.errors[0].message);
@@ -59,6 +63,16 @@ const RegisterForm = () => {
     } catch (error) {
       console.error("Registration failed:", error);
     }
+  };
+
+  // Function to handle redirecting to login page after successful registration
+  const handleLoginRedirect = () => {
+    navigate("/login");
+  };
+
+  // Function to handle closing the popup
+  const handleClosePopup = () => {
+    setRegistered(false);
   };
 
   return (
@@ -124,6 +138,17 @@ const RegisterForm = () => {
           </Link>
         </div>
       </Form>
+
+      {/* Overlay for successful registration */}
+      {registered && <div className="overlay"></div>}
+
+      {/* Popup for successful registration */}
+      {registered && (
+        <div className="popup">
+          <p>Welcome to Holidaze, please log in with your new account!</p>
+          <Button onClick={handleLoginRedirect}>OK</Button>
+        </div>
+      )}
     </div>
   );
 };

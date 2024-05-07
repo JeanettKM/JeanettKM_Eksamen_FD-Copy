@@ -81,10 +81,10 @@ const VenueDetail = () => {
 function HeaderAndFooterExample() {
   return (
     <Card className="text-center">
-      <Card.Header>Featured</Card.Header>
+      <Card.Header></Card.Header>
       {/* Rendering VenueDetail component */}
       <VenueDetail />
-      <Card.Footer className="text-muted">2 days ago</Card.Footer>
+      <Card.Footer className="text-muted">Limited availability</Card.Footer>
     </Card>
   );
 }
