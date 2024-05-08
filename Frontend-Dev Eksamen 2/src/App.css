@@ -1,269 +1,299 @@
 /* Header Styles */
 @media (max-width: 991.98px) {
   .d-flex {
-    justify-content: center;
+    justify-content: center; /* Center align flex items */
   }
 
   .me-auto {
-    margin-right: auto;
-    margin-left: 20px;
+    margin-right: auto; /* Right margin auto */
+    margin-left: 20px; /* Left margin */
   }
 }
 
+/* Navbar Brand */
 .navbar-brand p {
-  margin-left: 10px;
-  font-size: 1.2rem;
-  margin-bottom: 0px;
-  margin-right: 30px;
+  margin-left: 10px; /* Left margin */
+  font-size: 1.2rem; /* Font size */
+  margin-bottom: 0px; /* Bottom margin */
+  margin-right: 30px; /* Right margin */
 }
 
 .navbar-toggler {
-  border: none;
+  border: none; /* Remove border */
 }
+
+/* Overlay Styles */
 .overlay {
-  position: fixed;
+  position: fixed; /* Fixed position */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* darkened background */
+  background-color: rgba(0, 0, 0, 0.5); /* Darkened background */
   backdrop-filter: blur(5px); /* Blur */
-  z-index: 9998; /* making sure the overlay is behind the popup*/
+  z-index: 9998; /* Z-index */
 }
 
+/* Popup Styles */
 .popup {
-  position: fixed;
+  position: fixed; /* Fixed position */
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: none;
-  border-radius: 3px;
-  padding: 30px;
-  z-index: 9999; /* To get the popup to be above the overlay */
+  transform: translate(-50%, -50%); /* Center align */
+  background-color: white; /* Background color */
+  border: none; /* Remove border */
+  border-radius: 3px; /* Border radius */
+  padding: 30px; /* Padding */
+  z-index: 9999; /* Z-index */
 }
 
+/* Breadcrumbs Styles */
 .breadcrumbs {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  display: flex; /* Flex display */
+  justify-content: center; /* Center align */
+  margin-top: 20px; /* Top margin */
 }
 
 /* Venue Detail Styles */
 @media (min-width: 992px) {
   .card {
-    max-width: 80%;
-    margin: 0 auto;
+    max-width: 80%; /* Max width */
+    margin: 0 auto; /* Center align */
   }
 }
 
 #venue-image {
-  width: 100%;
-  height: auto;
-  border-radius: 2px;
-  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  width: 100%; /* Full width */
+  height: auto; /* Auto height */
+  border-radius: 2px; /* Border radius */
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px; /* Box shadow */
 }
 
 #venue-div {
-  margin: 0 auto;
-  max-width: 400px;
-  margin-bottom: 50px;
-  margin-top: 20px;
+  margin: 0 auto; /* Center align */
+  max-width: 400px; /* Max width */
+  margin-bottom: 50px; /* Bottom margin */
+  margin-top: 20px; /* Top margin */
 }
 
 .detailsText {
-  text-align: start;
-  font-size: 14px;
+  text-align: start; /* Text alignment */
+  font-size: 14px; /* Font size */
 }
 
 .text-center {
-  margin: 30px auto;
-  max-width: 60%;
+  margin: 30px auto; /* Center align */
+  max-width: 60%; /* Max width */
 }
 
 #VenueFeatures,
 #VenueCounter {
-  margin-top: 30px;
-  text-align: center;
+  margin-top: 30px; /* Top margin */
+  text-align: center; /* Text alignment */
 }
 
 /* Venue Overview Styles */
 div.jumbotron {
-  text-align: center;
-  background-color: var(--primary-color);
+  text-align: center; /* Text alignment */
+  background-color: var(--primary-color); /* Background color */
 }
 
 .venue-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: flex; /* Flex display */
+  flex-wrap: wrap; /* Wrap */
+  justify-content: space-between; /* Space between */
 }
 
 .venue-card .card {
-  height: 100%;
-  max-height: 400px;
-  min-height: 400px;
+  height: 100%; /* Full height */
+  max-height: 400px; /* Max height */
+  min-height: 400px; /* Min height */
 }
 
 .list-group-item {
-  text-align: initial;
-  font-size: 15px;
-  border-bottom: 0.5;
-  color: var(--text-color);
+  text-align: initial; /* Text alignment */
+  font-size: 15px; /* Font size */
+  border-bottom: 0.5; /* Border bottom */
+  color: var(--text-color); /* Text color */
 }
 
 #VenueFeatures {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: flex; /* Flex display */
+  flex-wrap: wrap; /* Wrap */
+  justify-content: space-between; /* Space between */
 }
 
 /* Common Styles from app.css */
 @keyframes logo-spin {
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg); /* Rotation */
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg); /* Rotation */
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+    animation: logo-spin infinite 20s linear; /* Animation */
   }
 }
 
 .inputWidth {
-  width: 60%;
-  margin: auto;
-  margin-top: 40px;
+  width: 60%; /* Width */
+  margin: auto; /* Center align */
+  margin-top: 40px; /* Top margin */
 }
 
 button,
 .btn {
-  margin: 15px;
-  border-radius: 2px;
+  margin: 15px; /* Margin */
+  border-radius: 2px; /* Border radius */
 }
 
 .text-muted {
-  padding-top: 10px;
+  padding-top: 10px; /* Top padding */
 }
 
 .text-center {
-  max-width: 600px;
-  width: 100%;
+  max-width: 600px; /* Max width */
+  width: 100%; /* Full width */
 }
 
 .venue-card,
 .text-center {
-  border-radius: 2px;
-  border: none;
+  border-radius: 2px; /* Border radius */
+  border: none; /* Remove border */
 }
 
 .card-img-top,
 .card-header {
-  border-radius: 2px 2px 0 0;
+  border-radius: 2px 2px 0 0; /* Border radius */
 }
 
 .venue-card,
 .card {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 2px 0px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 2px 0px; /* Box shadow */
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
     rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
-    rgba(0, 0, 0, 0.07) 0px 16px 16px;
+    rgba(0, 0, 0, 0.07) 0px 16px 16px; /* Box shadow */
 }
 
 .card {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; /* Box shadow */
 }
 
 .VenueContainer {
-  background: #00000004;
-  padding-bottom: 40px;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  background: #00000004; /* Background color */
+  padding-bottom: 40px; /* Bottom padding */
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px; /* Box shadow */
 }
 
 .g-4 {
-  padding-top: 20px;
+  padding-top: 20px; /* Top padding */
 }
 
 .col-12 {
-  margin-top: 40px;
+  margin-top: 40px; /* Top margin */
 }
 
 .card-header {
-  background-color: white;
+  background-color: white; /* Background color */
 }
 
 .venue-card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: space-evenly;
-  min-width: 250px;
+  display: flex; /* Flex display */
+  flex-direction: column; /* Flex direction */
+  width: 100%; /* Full width */
+  justify-content: space-evenly; /* Space evenly */
+  min-width: 250px; /* Min width */
 }
 
 .venue-card .card-img-top {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+  width: 100%; /* Full width */
+  height: 200px; /* Height */
+  object-fit: cover; /* Object fit */
 }
 
 .venue-card .card-body {
-  flex-grow: 1;
-  overflow: hidden;
-  color: var(--text-color);
+  flex-grow: 1; /* Flex grow */
+  overflow: hidden; /* Overflow */
+  color: var(--text-color); /* Text color */
+}
+
+.searchField {
+  margin: auto; /* Center align */
+  display: flex; /* Flex display */
+  align-items: center; /* Align items */
+  width: 30vw; /* Width */
+  border-radius: 3px; /* Border radius */
+}
+
+.searchBtn {
+  border-radius: 3px; /* Border radius */
+  font-size: 0.75rem; /* Font size */
+  --bs-btn-padding-y: 0.45rem; /* Button padding */
+  --bs-btn-padding-x: 1rem; /* Button padding */
 }
 
 .venue-card .card-text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--text-color);
+  white-space: nowrap; /* White space nowrap */
+  overflow: hidden; /* Overflow */
+  text-overflow: ellipsis; /* Text overflow */
+  color: var(--text-color); /* Text color */
 }
 
 .my-4 {
-  color: rgba(0, 0, 0, 0.269);
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+  color: rgba(0, 0, 0, 0.269); /* Text color */
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px; /* Box shadow */
 }
 
 /* Media Queries */
 @media (min-width: 992px) {
   .container {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 900px; /* Max width */
+    margin: 0 auto; /* Center align */
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1100px) {
+  .searchField {
+    margin: auto; /* Center align */
+    display: flex; /* Flex display */
+    align-items: center; /* Align items */
+    width: 70vw; /* Width */
+    border-radius: 3px; /* Border radius */
+  }
+}
+
+@media (max-width: 650px) {
   .breadcrumbs {
-    display: none;
+    display: none; /* Hide breadcrumbs */
   }
 }
 
 @media (max-width: 400px) {
   .jumbotron {
-    padding: 2px;
-    margin-top: 20px;
+    padding: 2px; /* Padding */
+    margin-top: 20px; /* Top margin */
   }
   .d-flex {
-    margin-top: 30px;
+    margin-top: 30px; /* Top margin */
   }
   .navbar-nav {
-    text-align: center;
+    text-align: center; /* Text alignment */
   }
   .inputWidth {
-    width: 100%;
-    margin: auto;
+    width: 100%; /* Full width */
+    margin: auto; /* Center align */
   }
   ul.col-12 {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: column; /* Flex direction */
+    text-align: center; /* Text alignment */
   }
   .text-center {
-    margin: 30px auto;
-    max-width: 100%;
+    margin: 30px auto; /* Center align */
+    max-width: 100%; /* Max width */
   }
 }

@@ -5,23 +5,48 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FetchAPI from "../API/FetchAPI"; // Import FetchAPI component
+import { InputGroup, Form, Button } from "react-bootstrap";
 
 const VenueOverview = () => {
   const [venues, setVenues] = useState([]);
   const [displayedVenues, setDisplayedVenues] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
   const itemsPerPage = 6;
 
   useEffect(() => {
-    FetchAPI("venues").then((data) => {
-      if (data && Array.isArray(data.data)) {
-        setVenues(data.data);
-        setDisplayedVenues(data.data.slice(0, itemsPerPage));
-      } else {
-        console.error("Expected an array of venues, but received:", data);
-      }
-    });
+    loadVenues();
   }, []);
+
+  const loadVenues = async () => {
+    const data = await FetchAPI("venues");
+    if (data && Array.isArray(data.data)) {
+      setVenues(data.data);
+      setDisplayedVenues(data.data.slice(0, itemsPerPage));
+    } else {
+      console.error("Expected an array of venues, but received:", data);
+    }
+  };
+
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) {
+      // If search query is empty, load all venues
+      loadVenues();
+      return;
+    }
+
+    const data = await FetchAPI(`venues/search?q=${searchQuery}`);
+    if (data && Array.isArray(data.data)) {
+      setDisplayedVenues(data.data.slice(0, itemsPerPage));
+      setCurrentPage(1);
+    } else {
+      console.error("Error while searching venues:", data);
+    }
+  };
+
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
   const loadMoreVenues = () => {
     const startIndex = currentPage * itemsPerPage;
@@ -41,25 +66,38 @@ const VenueOverview = () => {
         <p className="lead text-secondary">
           Can you find the perfect venue for your next event?
         </p>
+        <InputGroup className="mb-3 searchField">
+          <Form.Control
+            type="text"
+            placeholder="Search venues by name or description..."
+            aria-label="Search"
+            aria-describedby="inputGroup-sizing-default"
+            value={searchQuery}
+            onChange={handleChange}
+          />
+          <Button
+            className="searchBtn"
+            variant="primary"
+            type="button"
+            onClick={handleSearch}
+          >
+            Search
+          </Button>
+        </InputGroup>
         <hr className="my-4" />
         <Container className="VenueContainer">
           <Row xs={1} md={2} lg={3} className="g-4">
             {displayedVenues.map((venue) => (
               <Col key={venue.id} xs={12}>
-                {" "}
                 <VenueCard venue={venue} />
               </Col>
             ))}
           </Row>
         </Container>
         <br />
-        <button
-          className="btn btn-primary btn-lg"
-          onClick={loadMoreVenues}
-          role="button"
-        >
+        <Button variant="primary" onClick={loadMoreVenues} role="button">
           Load more venues
-        </button>
+        </Button>
       </div>
     </div>
   );
