@@ -34,9 +34,6 @@ const VenueDetail = () => {
       <Card.Body>
         {/* Displaying venue name */}
         <Card.Title>{venue.name}</Card.Title>
-        {/* Displaying venue description */}
-        <Card.Text>{venue.description}</Card.Text>
-        {/* Displaying venue image */}
         <div id="venue-div">
           <img
             id="venue-image"
@@ -44,6 +41,9 @@ const VenueDetail = () => {
             alt={venue.media[0]?.alt}
           />
         </div>
+        {/* Displaying venue description */}
+        <Card.Text>{venue.description}</Card.Text>
+        {/* Displaying venue image */}
         <div className="detailsText">
           {/* Displaying venue details */}
           <p>Price: {venue.price}</p>
