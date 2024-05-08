@@ -10,6 +10,25 @@
   }
 }
 
+/*body,
+header,
+h1,
+ul,
+li,
+.navbar-collapse,
+.navbar,
+.nav-link,
+.container-fluid {
+  background-color: #fff8f6;
+  color: #f7cb8c;
+   #982e4f
+}
+
+.navbar-brand {
+  color: #982e4f;
+}
+*/
+
 /* Navbar Brand */
 .navbar-brand p {
   margin-left: 10px; /* Left margin */
