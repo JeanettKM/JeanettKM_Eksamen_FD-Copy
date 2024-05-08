@@ -267,6 +267,19 @@ button,
   }
 }
 
+@media (max-width: 800px) {
+  .maps,
+  .contactForm {
+    margin-top: 30px; /* Top margin */
+    text-align: center;
+  }
+  .sendMsgbtn {
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+}
+
 @media (max-width: 650px) {
   .breadcrumbs {
     display: none; /* Hide breadcrumbs */
