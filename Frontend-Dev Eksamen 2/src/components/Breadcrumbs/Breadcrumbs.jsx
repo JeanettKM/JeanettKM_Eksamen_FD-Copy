@@ -8,15 +8,15 @@ function BreadcrumbExample() {
 
   return (
     <Breadcrumb className="breadcrumbs">
-      <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/login" }}>
+      <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
         Home
       </Breadcrumb.Item>
 
       {paths.map((path, index) => (
         <Breadcrumb.Item
           key={index}
-          as={Link}
-          to={`/${paths.slice(0, index + 1).join("/")}`}
+          linkAs={Link}
+          linkProps={{ to: `/${paths.slice(0, index + 1).join("/")}` }}
           active={index === paths.length - 1}
         >
           {path}

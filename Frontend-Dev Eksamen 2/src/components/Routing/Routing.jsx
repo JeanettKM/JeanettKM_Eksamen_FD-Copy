@@ -8,6 +8,7 @@ import CartPage from "../CartPage/CartPage";
 import Orders from "../Orders/Orders";
 import VenueDetail from "../VenueDetail/VenueDetail";
 import ContactUs from "../ContactUsPage/ContactUs";
+import MyVenues from "../UserPage/MyVenues";
 import Footer from "../Footer/Footer";
 
 function Routing() {
@@ -23,6 +24,7 @@ function Routing() {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/orders" element={<Orders />} />
       <Route path="/contact" element={<ContactUs />} />
+      <Route path="/my-venues" element={<MyVenues />} /> {/* Add this line */}
     </Routes>
   );
 }

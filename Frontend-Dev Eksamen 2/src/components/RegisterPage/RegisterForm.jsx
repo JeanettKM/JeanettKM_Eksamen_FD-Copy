@@ -10,52 +10,57 @@ const RegisterForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [venueManager, setVenueManager] = useState(false); // New state for venue manager
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [apiError, setApiError] = useState("");
-  const [registered, setRegistered] = useState(false); // New state to track registration status
+  const [registered, setRegistered] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
     try {
-      // Reset previous error messages
       setNameError("");
       setEmailError("");
       setPasswordError("");
       setApiError("");
 
-      // Validate input name
       if (!name) {
         setNameError("Name is required");
         return;
       }
 
-      // Validate input email
       if (!email) {
         setEmailError("Email is required");
         return;
       }
 
-      // Validate input password
+      if (venueManager && !email.endsWith("@stud.noroff.no")) {
+        setEmailError(
+          "Only students from noroff.no can register as a Venue Manager"
+        );
+        return;
+      }
+
       if (!password) {
         setPasswordError("Password is required");
         return;
       }
 
-      // Call registerUser function to register a new user
-      const response = await registerUser({ name, email, password });
+      const response = await registerUser({
+        name,
+        email,
+        password,
+        venueManager,
+      });
       console.log("Registration Response:", response);
 
-      // Check if registration was successful
-      if (response && response.data && response.data.email) {
+      if (response && response.email) {
         console.log("Registration successful!");
-        // Set registered state to true to display the popup
         setRegistered(true);
       } else if (response && response.errors && response.errors.length > 0) {
-        // Display API error message if any errors are present
         setApiError(response.errors[0].message);
       } else {
         console.error("Registration failed:", response);
@@ -65,12 +70,10 @@ const RegisterForm = () => {
     }
   };
 
-  // Function to handle redirecting to login page after successful registration
   const handleLoginRedirect = () => {
     navigate("/login");
   };
 
-  // Function to handle closing the popup
   const handleClosePopup = () => {
     setRegistered(false);
   };
@@ -120,6 +123,16 @@ const RegisterForm = () => {
             )}
           </Form.Group>
           <br />
+
+          <Form.Group className="sm-3" controlId="formBasicVenueManager">
+            <Form.Check
+              type="checkbox"
+              label="Register as Venue Manager"
+              checked={venueManager}
+              onChange={(e) => setVenueManager(e.target.checked)}
+            />
+          </Form.Group>
+          <br />
         </div>
         {apiError && <Form.Text className="text-danger">{apiError}</Form.Text>}
 
@@ -139,10 +152,7 @@ const RegisterForm = () => {
         </div>
       </Form>
 
-      {/* Overlay for successful registration */}
       {registered && <div className="overlay"></div>}
-
-      {/* Popup for successful registration */}
       {registered && (
         <div className="popup">
           <p>Welcome to Holidaze, please log in with your new account!</p>

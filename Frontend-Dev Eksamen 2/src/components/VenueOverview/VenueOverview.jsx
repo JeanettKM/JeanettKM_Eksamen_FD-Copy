@@ -19,12 +19,17 @@ const VenueOverview = () => {
   }, []);
 
   const loadVenues = async () => {
-    const data = await FetchAPI("venues");
-    if (data && Array.isArray(data.data)) {
-      setVenues(data.data);
-      setDisplayedVenues(data.data.slice(0, itemsPerPage));
-    } else {
-      console.error("Expected an array of venues, but received:", data);
+    try {
+      const data = await FetchAPI("holidaze/venues");
+      console.log("Fetched venues data:", data);
+      if (data && Array.isArray(data.data)) {
+        setVenues(data.data);
+        setDisplayedVenues(data.data.slice(0, itemsPerPage));
+      } else {
+        console.error("Expected an array of venues, but received:", data);
+      }
+    } catch (error) {
+      console.error("Error fetching venues:", error);
     }
   };
 
@@ -35,12 +40,17 @@ const VenueOverview = () => {
       return;
     }
 
-    const data = await FetchAPI(`venues/search?q=${searchQuery}`);
-    if (data && Array.isArray(data.data)) {
-      setDisplayedVenues(data.data.slice(0, itemsPerPage));
-      setCurrentPage(1);
-    } else {
-      console.error("Error while searching venues:", data);
+    try {
+      const data = await FetchAPI(`holidaze/venues/search?q=${searchQuery}`);
+      console.log("Searched venues data:", data);
+      if (data && Array.isArray(data.data)) {
+        setDisplayedVenues(data.data.slice(0, itemsPerPage));
+        setCurrentPage(1);
+      } else {
+        console.error("Error while searching venues:", data);
+      }
+    } catch (error) {
+      console.error("Error searching venues:", error);
     }
   };
 
