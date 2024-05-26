@@ -1,7 +1,6 @@
 import React from "react";
 import LoginForm from "../LoginPage/LoginForm";
-import Footer from "../Footer/Footer"; // Import the Footer component
-import "../LoginPage/loginPage.css"; // Import the custom CSS for the page
+import Footer from "../Footer/Footer";
 
 const LoginPage = () => {
   return (

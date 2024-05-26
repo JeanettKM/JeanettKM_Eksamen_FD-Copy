@@ -9,7 +9,6 @@ import {
   Alert,
   Image,
 } from "react-bootstrap";
-import "./userPage.css";
 import FetchAPI from "../API/FetchAPI";
 
 const UserPage = () => {
@@ -31,13 +30,13 @@ const UserPage = () => {
   const [venuePrice, setVenuePrice] = useState("");
   const [venueMaxGuests, setVenueMaxGuests] = useState("");
 
-  // Fetch user profile and bookings on component mount
+  // Fetch user profile and bookings
   useEffect(() => {
     const profileName = localStorage.getItem("name");
     if (profileName) {
       fetchUserProfile(profileName);
     } else {
-      setError("Profile name not found in local storage");
+      setError("Profile name could not be found in local storage");
     }
   }, []);
 
@@ -66,7 +65,7 @@ const UserPage = () => {
     }
   };
 
-  // Handle profile update form submission
+  // Handle profile update
   const handleProfileUpdate = async (event) => {
     event.preventDefault();
     const profileName = localStorage.getItem("name");
@@ -151,21 +150,23 @@ const UserPage = () => {
               setBio={setBio}
               handleProfileUpdate={handleProfileUpdate}
             />
-            <VenueCreateForm
-              venueName={venueName}
-              setVenueName={setVenueName}
-              venueLocation={venueLocation}
-              setVenueLocation={setVenueLocation}
-              venueDescription={venueDescription}
-              setVenueDescription={setVenueDescription}
-              venueImage={venueImage}
-              setVenueImage={setVenueImage}
-              venuePrice={venuePrice}
-              setVenuePrice={setVenuePrice}
-              venueMaxGuests={venueMaxGuests}
-              setVenueMaxGuests={setVenueMaxGuests}
-              handleVenueCreate={handleVenueCreate}
-            />
+            {userData?.venueManager && (
+              <VenueCreateForm
+                venueName={venueName}
+                setVenueName={setVenueName}
+                venueLocation={venueLocation}
+                setVenueLocation={setVenueLocation}
+                venueDescription={venueDescription}
+                setVenueDescription={setVenueDescription}
+                venueImage={venueImage}
+                setVenueImage={setVenueImage}
+                venuePrice={venuePrice}
+                setVenuePrice={setVenuePrice}
+                venueMaxGuests={venueMaxGuests}
+                setVenueMaxGuests={setVenueMaxGuests}
+                handleVenueCreate={handleVenueCreate}
+              />
+            )}
             <UpcomingBookings userBookings={userBookings} />
           </Col>
         </Row>
@@ -189,8 +190,8 @@ const ProfileOverview = ({ userData }) => (
             />
           </div>
         )}
-        <p className="text-center">Name: {userData.name}</p>
-        {userData.bio && <p className="text-center">Bio: {userData.bio}</p>}
+        <p className="text-center">{userData.name}</p>
+        {userData.bio && <p className="text-center">- {userData.bio}</p>}
         <p className="text-center">
           Venue Manager: {userData.venueManager ? "Yes" : "No"}
         </p>

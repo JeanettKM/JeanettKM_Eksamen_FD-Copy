@@ -6,13 +6,12 @@ import Calendar from "react-calendar";
 import FetchAPI from "../API/FetchAPI";
 import "react-calendar/dist/Calendar.css";
 
-// Create the VenueDetail component
 const VenueDetail = () => {
-  // Extracting the 'id' parameter from the URL
+  // Create the unique id for the venue
   const { id } = useParams();
   const [venue, setVenue] = useState(null);
   const [error, setError] = useState(null);
-  const [bookingError, setBookingError] = useState(null); // Error state for booking
+  const [bookingError, setBookingError] = useState(null);
   const [dates, setDates] = useState([new Date(), new Date()]);
   const [guests, setGuests] = useState(1);
   const [bookedDates, setBookedDates] = useState([]);
@@ -30,7 +29,7 @@ const VenueDetail = () => {
           console.log("Venue data:", data.data);
           setVenue(data.data);
 
-          // Extracting booked dates
+          // Getting booked dates
           const bookings = data.data.bookings || [];
           const dates = bookings.flatMap((booking) => {
             const startDate = new Date(booking.dateFrom);
@@ -77,8 +76,7 @@ const VenueDetail = () => {
 
       if (response) {
         console.log("Booking successful!", response);
-        setBookingError(null); // Reset booking error on success
-        // Update booked dates state
+        setBookingError(null);
         const newBookedDates = [];
         let currentDate = new Date(formattedStartDate);
         while (currentDate <= new Date(formattedEndDate)) {
@@ -97,28 +95,32 @@ const VenueDetail = () => {
       } else {
         console.error("Error making booking:", error);
         setBookingError(
-          "An error occurred while making the booking. Please try again."
+          "An error occurred while trying to book. Please try again."
         );
       }
     }
   };
 
-  // Function to disable booked dates
-  const tileDisabled = ({ date }) => {
-    return bookedDates.some(
-      (bookedDate) => bookedDate.toDateString() === date.toDateString()
-    );
+  // Gray out the booked dates in the calendar
+  const tileDisabled = ({ date, view }) => {
+    if (view === "month") {
+      const isDisabled = bookedDates.some(
+        (bookedDate) => bookedDate.toDateString() === date.toDateString()
+      );
+      console.log("Date:", date, "is disabled:", isDisabled);
+      return isDisabled;
+    }
+    return false;
   };
 
-  // Display a loading message to indicate data is being fetched
+  // Display a loading message
   if (error) return <div>Error: {error}</div>;
   if (!venue) return <div>Loading...</div>;
 
-  // Displaying the venue details once data is fetched
+  // Displaying the venue details
   return (
     <div id="venue-div">
       <Card.Body>
-        {/* Displaying venue name */}
         <Card.Title>{venue.name}</Card.Title>
         <div id="venue-div">
           {venue.media && venue.media.length > 0 ? (
@@ -131,11 +133,8 @@ const VenueDetail = () => {
             <p>No image available</p>
           )}
         </div>
-        {/* Displaying venue description */}
         <Card.Text>{venue.description}</Card.Text>
-        {/* Displaying venue image */}
         <div className="detailsText">
-          {/* Displaying venue details */}
           <p>Price: {venue.price}</p>
           <p>Max Guests: {venue.maxGuests}</p>
           <p>Rating: {venue.rating}</p>
@@ -144,7 +143,6 @@ const VenueDetail = () => {
             {venue.location?.country || "N/A"}
           </p>
           <hr className="my-4" />
-          {/* Displaying venue features */}
           <div id="VenueFeatures" className="row">
             <div className="col-md-6">
               <p>Wifi: {venue.meta?.wifi ? "Yes" : "No"}</p>
@@ -156,12 +154,10 @@ const VenueDetail = () => {
             </div>
           </div>
           <hr className="my-4" />
-          {/* Displaying booking count */}
           <div id="VenueCounter">
             <p>Number of Bookings: {venue._count?.bookings || 0}</p>
           </div>
         </div>
-        {/* Calendar for selecting dates */}
         <div>
           <h5>Select your dates:</h5>
           <Calendar
@@ -171,8 +167,8 @@ const VenueDetail = () => {
             tileDisabled={tileDisabled}
           />
         </div>
-        {/* Input for number of guests */}
         <div>
+          <br />
           <label htmlFor="guests">Number of Guests:</label>
           <input
             type="number"
@@ -183,9 +179,7 @@ const VenueDetail = () => {
             onChange={(e) => setGuests(parseInt(e.target.value))}
           />
         </div>
-        {/* Display booking error if any */}
         {bookingError && <p className="text-danger">{bookingError}</p>}
-        {/* Button to book the venue */}
         <Button variant="primary" onClick={handleBooking}>
           Book Now
         </Button>
@@ -199,9 +193,10 @@ function HeaderAndFooterExample() {
   return (
     <Card className="text-center">
       <Card.Header></Card.Header>
-      {/* Rendering VenueDetail component */}
       <VenueDetail />
-      <Card.Footer className="text-muted">Limited availability</Card.Footer>
+      <Card.Footer className="text-muted">
+        Hurry and book your favorite venue!
+      </Card.Footer>
     </Card>
   );
 }

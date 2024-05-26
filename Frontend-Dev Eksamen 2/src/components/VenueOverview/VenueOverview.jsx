@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import "./venueOverview.css";
 import VenueCard from "./VenueCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import FetchAPI from "../API/FetchAPI"; // Import FetchAPI component
+import FetchAPI from "../API/FetchAPI";
 import { InputGroup, Form, Button } from "react-bootstrap";
 
 const VenueOverview = () => {
+  // State variables
   const [venues, setVenues] = useState([]);
   const [displayedVenues, setDisplayedVenues] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,6 +18,7 @@ const VenueOverview = () => {
     loadVenues();
   }, []);
 
+  // Load venues from the API
   const loadVenues = async () => {
     try {
       const data = await FetchAPI("holidaze/venues");
@@ -33,6 +34,7 @@ const VenueOverview = () => {
     }
   };
 
+  // Search functionality
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
       // If search query is empty, load all venues
@@ -54,10 +56,12 @@ const VenueOverview = () => {
     }
   };
 
+  // Handle changes in the search field
   const handleChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
+  // load more venues btn
   const loadMoreVenues = () => {
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;

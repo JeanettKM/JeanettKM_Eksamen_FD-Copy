@@ -1,35 +1,37 @@
 import React, { useState, useEffect } from "react";
 import FetchAPI from "../API/FetchAPI";
-import "bootstrap/dist/css/bootstrap.min.css"; // Ensure you have Bootstrap imported
-import "./userPage.css"; // Import the custom CSS for the footer
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const MyVenues = () => {
+  // state variables
   const [venues, setVenues] = useState([]);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null); // State variable for success message
+  const [success, setSuccess] = useState(null);
   const [editingVenue, setEditingVenue] = useState(null);
 
   useEffect(() => {
+    // Find the profile name in local storage
     const profileName = localStorage.getItem("name");
 
     const fetchVenues = async () => {
       try {
         if (profileName) {
+          // Fetch venues created with the currently logged in profile
           const response = await FetchAPI(
             `holidaze/profiles/${profileName}/venues`
           );
           console.log("Fetched venues response:", response);
 
-          // Check the structure of the response and log it
+          // Check the response
           if (response && response.data) {
             console.log("Fetched venues data:", response.data);
             setVenues(response.data);
           } else {
-            console.error("Invalid response structure:", response);
-            setError("Invalid response structure");
+            console.error("Invalid response:", response);
+            setError("Invalid response");
           }
         } else {
-          setError("Profile name not found in local storage");
+          setError("Profile name could not be found in local storage");
         }
       } catch (error) {
         console.error("Error fetching venues:", error);
@@ -40,10 +42,12 @@ const MyVenues = () => {
     fetchVenues();
   }, []);
 
+  // Click on Edit btn
   const handleEditClick = (venue) => {
     setEditingVenue(venue);
   };
 
+  // Handle edit venue
   const handleVenueUpdate = async (event) => {
     event.preventDefault();
     const { id, name, location, description, image, price, maxGuests } =
@@ -59,12 +63,15 @@ const MyVenues = () => {
     };
 
     try {
+      // Update the venue
       const updatedVenue = await FetchAPI(
         `holidaze/venues/${id}`,
         "PUT",
         requestBody
       );
       console.log("Updated venue:", updatedVenue);
+
+      // Update with the new venue information
       setVenues((prevVenues) =>
         prevVenues.map((venue) => (venue.id === id ? updatedVenue.data : venue))
       );
@@ -75,10 +82,14 @@ const MyVenues = () => {
     }
   };
 
+  // Handle Delete btn
   const handleDeleteClick = async (venueId) => {
     try {
+      // Delete the venue
       await FetchAPI(`holidaze/venues/${venueId}`, "DELETE");
       console.log("Deleted venue:", venueId);
+
+      // Remove the venue
       setVenues((prevVenues) =>
         prevVenues.filter((venue) => venue.id !== venueId)
       );
@@ -89,6 +100,7 @@ const MyVenues = () => {
     }
   };
 
+  // Handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditingVenue((prev) => ({ ...prev, [name]: value }));
@@ -99,8 +111,7 @@ const MyVenues = () => {
       <div className="my-venues container d-flex flex-column align-items-center flex-grow-1">
         <h2>My Venues</h2>
         {error && <p className="text-danger">Error: {error}</p>}
-        {success && <p className="text-success">{success}</p>}{" "}
-        {/* Display success message */}
+        {success && <p className="text-success">{success}</p>}
         {venues.length > 0 ? (
           <ul className="list-unstyled w-100">
             {venues.map((venue) => (

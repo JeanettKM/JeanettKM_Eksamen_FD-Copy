@@ -1,4 +1,3 @@
-// ApiKey.js
 import { API_BASE_URL } from "../API/config";
 
 export const createApiKey = async (accessToken) => {

@@ -1,6 +1,5 @@
 import React from "react";
-import Footer from "../Footer/Footer"; // Import the Footer component
-import "./ContactUs.css";
+import Footer from "../Footer/Footer";
 
 const ContactUs = () => {
   return (
@@ -56,7 +55,7 @@ const ContactUs = () => {
               <h5>Email:</h5>
               <p>Holidaze@venues.com</p>
               <h5>Phone:</h5>
-              <p>+4798989898</p>
+              <p>+47 989 89 898</p>
             </div>
           </div>
         </div>
