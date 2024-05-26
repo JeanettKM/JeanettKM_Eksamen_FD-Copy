@@ -10,25 +10,6 @@
   }
 }
 
-/*body,
-header,
-h1,
-ul,
-li,
-.navbar-collapse,
-.navbar,
-.nav-link,
-.container-fluid {
-  background-color: #fff8f6;
-  color: #f7cb8c;
-   #982e4f
-}
-
-.navbar-brand {
-  color: #982e4f;
-}
-*/
-
 /* Navbar Brand */
 .navbar-brand p {
   margin-left: 10px; /* Left margin */
@@ -286,19 +267,6 @@ button,
   }
 }
 
-@media (max-width: 800px) {
-  .maps,
-  .contactForm {
-    margin-top: 30px; /* Top margin */
-    text-align: center;
-  }
-  .sendMsgbtn {
-    display: block;
-    margin: auto;
-    margin-bottom: 30px;
-  }
-}
-
 @media (max-width: 650px) {
   .breadcrumbs {
     display: none; /* Hide breadcrumbs */
@@ -317,7 +285,7 @@ button,
     text-align: center; /* Text alignment */
   }
   .inputWidth {
-    width: 100%; /* Full width */
+    width: 10o 0%; /* Full width */
     margin: auto; /* Center align */
   }
   ul.col-12 {
@@ -328,4 +296,24 @@ button,
     margin: 30px auto; /* Center align */
     max-width: 100%; /* Max width */
   }
+}
+html,
+body {
+  height: 100%;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* loginPage.css */
+html,
+body {
+  height: 100%;
+}
+
+.jumbotron {
+  flex-grow: 1; /* Ensure the jumbotron takes up remaining space */
 }

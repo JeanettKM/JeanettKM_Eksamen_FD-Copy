@@ -1,0 +1,9 @@
+/* ContactUs.css */
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  flex-grow: 1; /* Ensure the container takes up remaining space */
+}

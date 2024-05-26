@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Alert,
+  Image,
+} from "react-bootstrap";
 import "./userPage.css";
 import FetchAPI from "../API/FetchAPI";
 
@@ -31,7 +40,7 @@ const UserPage = () => {
             `holidaze/profiles/${profileName}`
           );
           console.log("Fetched user profile:", userProfile);
-          setUserData(userProfile.data); // Ensure this is correctly accessing the data
+          setUserData(userProfile.data);
           fetchUserBookings(profileName);
         } else {
           setError("Profile name not found in local storage");
@@ -52,7 +61,7 @@ const UserPage = () => {
           }
         );
         console.log("Fetched user bookings:", bookings);
-        setUserBookings(bookings.data || []); // Ensure this is correctly accessing the data
+        setUserBookings(bookings.data || []);
       } catch (error) {
         console.error("Error fetching user bookings:", error);
         setError(error.message);
@@ -90,7 +99,7 @@ const UserPage = () => {
       );
 
       console.log("Updated user profile:", updatedProfile);
-      setUserData(updatedProfile.data); // Ensure this is correctly accessing the data
+      setUserData(updatedProfile.data);
       setAvatarUrl("");
       setAvatarAlt("");
       setBio("");
@@ -129,7 +138,6 @@ const UserPage = () => {
     try {
       const newVenue = await FetchAPI("holidaze/venues", "POST", requestBody);
       console.log("Created new venue:", newVenue);
-      // Optionally update state or provide feedback to the user
     } catch (error) {
       console.error("Error creating venue:", error);
       setError(error.message);
@@ -137,189 +145,189 @@ const UserPage = () => {
   };
 
   return (
-    <div className="user-page">
-      <h2>Profile Overview</h2>
-      {error ? (
-        <p>Error: {error}</p>
-      ) : userData ? (
-        <div>
-          {userData.banner && (
-            <div>
-              <img src={userData.banner.url} alt={userData.banner.alt} />
-            </div>
-          )}
-          {userData.avatar && (
-            <div>
-              <img src={userData.avatar.url} alt={userData.avatar.alt} />
-            </div>
-          )}
-          <p>Name: {userData.name}</p>
-          {userData.bio && <p>Bio: {userData.bio}</p>}
-          <p>Venue Manager: {userData.venueManager ? "Yes" : "No"}</p>
-          <p>
-            <Link to="/my-venues">
-              Number of Venues: {userData._count?.venues || 0}
-            </Link>
-          </p>
-          <p>Number of Bookings: {userData._count?.bookings || 0}</p>
-          <h3>Upcoming Bookings</h3>
-          {userBookings.length > 0 ? (
-            <ul>
-              {userBookings.map((booking) => (
-                <li key={booking.id}>
-                  <p>
-                    Venue:{" "}
-                    {booking.venue ? booking.venue.name : "Unknown Venue"}
-                  </p>
-                  <p>From: {new Date(booking.dateFrom).toLocaleDateString()}</p>
-                  <p>To: {new Date(booking.dateTo).toLocaleDateString()}</p>
-                  <p>Guests: {booking.guests}</p>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No upcoming bookings.</p>
-          )}
-          <h3>Update Profile</h3>
-          <form onSubmit={handleProfileUpdate}>
-            <div>
-              <label>
-                Avatar URL:
-                <input
-                  type="text"
-                  value={avatarUrl}
-                  onChange={(e) => setAvatarUrl(e.target.value)}
-                />
-              </label>
-            </div>
-            <div>
-              <label>
-                Avatar Alt Text:
-                <input
-                  type="text"
-                  value={avatarAlt}
-                  onChange={(e) => setAvatarAlt(e.target.value)}
-                />
-              </label>
-            </div>
-            <div>
-              <label>
-                Bio:
-                <textarea
-                  value={bio}
-                  onChange={(e) => setBio(e.target.value)}
-                />
-              </label>
-            </div>
-            <button type="submit">Update Profile</button>
-          </form>
-          {userData.venueManager && (
-            <div>
-              <h3>Create Venue</h3>
-              <form onSubmit={handleVenueCreate}>
-                <div>
-                  <label>
-                    Venue Name:
-                    <input
-                      type="text"
-                      value={venueName}
-                      onChange={(e) => setVenueName(e.target.value)}
-                    />
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    Venue Location Address:
-                    <input
-                      type="text"
-                      value={venueLocation.address}
-                      onChange={(e) =>
-                        setVenueLocation({
-                          ...venueLocation,
-                          address: e.target.value,
-                        })
-                      }
-                    />
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    Venue Location City:
-                    <input
-                      type="text"
-                      value={venueLocation.city}
-                      onChange={(e) =>
-                        setVenueLocation({
-                          ...venueLocation,
-                          city: e.target.value,
-                        })
-                      }
-                    />
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    Venue Location Country:
-                    <input
-                      type="text"
-                      value={venueLocation.country}
-                      onChange={(e) =>
-                        setVenueLocation({
-                          ...venueLocation,
-                          country: e.target.value,
-                        })
-                      }
-                    />
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    Venue Description:
-                    <textarea
-                      value={venueDescription}
-                      onChange={(e) => setVenueDescription(e.target.value)}
-                    />
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    Venue Image URL:
-                    <input
-                      type="text"
-                      value={venueImage}
-                      onChange={(e) => setVenueImage(e.target.value)}
-                    />
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    Venue Price:
-                    <input
-                      type="number"
-                      value={venuePrice}
-                      onChange={(e) => setVenuePrice(e.target.value)}
-                    />
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    Max Guests:
-                    <input
-                      type="number"
-                      value={venueMaxGuests}
-                      onChange={(e) => setVenueMaxGuests(e.target.value)}
-                    />
-                  </label>
-                </div>
-                <button type="submit">Create Venue</button>
-              </form>
-            </div>
-          )}
+    <>
+      {userData && userData.banner && (
+        <div className="banner">
+          <Image src={userData.banner.url} alt={userData.banner.alt} fluid />
         </div>
-      ) : (
-        <p>Loading...</p>
       )}
-    </div>
+      <Container className="custom-container user-page mt-5">
+        <Row className="justify-content-center">
+          <Col md={8} className="d-flex flex-column align-items-center">
+            {error && <Alert variant="danger">Error: {error}</Alert>}
+            <h2 className="text-center mb-4">Profile Overview</h2>
+            {userData && (
+              <div className="text-center w-100">
+                {userData.avatar && (
+                  <div className="text-center mb-3">
+                    <Image
+                      src={userData.avatar.url}
+                      alt={userData.avatar.alt}
+                      roundedCircle
+                      className="profile-picture img-fluid"
+                    />
+                  </div>
+                )}
+                <p className="text-center">Name: {userData.name}</p>
+                {userData.bio && (
+                  <p className="text-center">- {userData.bio}</p>
+                )}
+                <p className="text-center">
+                  Venue Manager: {userData.venueManager ? "Yes" : "No"}
+                </p>
+                <p className="text-center">
+                  <Link to="/my-venues">
+                    Number of Venues: {userData._count?.venues || 0}
+                  </Link>
+                </p>
+                <p className="text-center">
+                  Number of Bookings: {userData._count?.bookings || 0}
+                </p>
+                <h3 className="text-center mt-4">Update Profile</h3>
+                <Form onSubmit={handleProfileUpdate} className="mb-4 w-100">
+                  <Form.Group>
+                    <Form.Label>Avatar URL:</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={avatarUrl}
+                      onChange={(e) => setAvatarUrl(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Avatar Alt Text:</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={avatarAlt}
+                      onChange={(e) => setAvatarAlt(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Bio:</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      value={bio}
+                      onChange={(e) => setBio(e.target.value)}
+                    />
+                  </Form.Group>
+                  <div className="d-flex justify-content-center">
+                    <Button type="submit" variant="primary" className="w-50">
+                      Update Profile
+                    </Button>
+                  </div>
+                </Form>
+              </div>
+            )}
+            <h3 className="text-center mt-4">Create Venue</h3>
+            <Form onSubmit={handleVenueCreate} className="w-100">
+              <Form.Group>
+                <Form.Label>Venue Name:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={venueName}
+                  onChange={(e) => setVenueName(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Venue Location Address:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={venueLocation.address}
+                  onChange={(e) =>
+                    setVenueLocation({
+                      ...venueLocation,
+                      address: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Venue Location City:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={venueLocation.city}
+                  onChange={(e) =>
+                    setVenueLocation({
+                      ...venueLocation,
+                      city: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Venue Location Country:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={venueLocation.country}
+                  onChange={(e) =>
+                    setVenueLocation({
+                      ...venueLocation,
+                      country: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Venue Description:</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  value={venueDescription}
+                  onChange={(e) => setVenueDescription(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Venue Image URL:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={venueImage}
+                  onChange={(e) => setVenueImage(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Venue Price:</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={venuePrice}
+                  onChange={(e) => setVenuePrice(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Max Guests:</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={venueMaxGuests}
+                  onChange={(e) => setVenueMaxGuests(e.target.value)}
+                />
+              </Form.Group>
+              <div className="d-flex justify-content-center">
+                <Button type="submit" variant="primary" className="w-50">
+                  Create Venue
+                </Button>
+              </div>
+            </Form>
+            <h3 className="text-center mt-4">Upcoming Bookings</h3>
+            {userBookings.length > 0 ? (
+              <ul className="list-unstyled text-center w-100">
+                {userBookings.map((booking) => (
+                  <li key={booking.id} className="mb-3">
+                    <p>
+                      Venue:{" "}
+                      {booking.venue ? booking.venue.name : "Unknown Venue"}
+                    </p>
+                    <p>
+                      From: {new Date(booking.dateFrom).toLocaleDateString()}
+                    </p>
+                    <p>To: {new Date(booking.dateTo).toLocaleDateString()}</p>
+                    <p>Guests: {booking.guests}</p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-center">No upcoming bookings.</p>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

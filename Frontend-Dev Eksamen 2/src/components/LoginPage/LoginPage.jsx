@@ -1,11 +1,12 @@
 import React from "react";
 import LoginForm from "../LoginPage/LoginForm";
-import "../LoginPage/loginPage.css";
+import Footer from "../Footer/Footer"; // Import the Footer component
+import "../LoginPage/loginPage.css"; // Import the custom CSS for the page
 
 const LoginPage = () => {
   return (
-    <div>
-      <div className="jumbotron jumbotron-fluid">
+    <div className="d-flex flex-column min-vh-100">
+      <div className="jumbotron jumbotron-fluid flex-grow-1">
         <div className="container">
           <h1 className="display-4">Welcome to Holidaze</h1>
           <p className="lead">
