@@ -12,10 +12,10 @@ import {
 import FetchAPI from "../API/FetchAPI";
 
 const UserPage = () => {
-  // State variables
   const [userData, setUserData] = useState(null);
   const [userBookings, setUserBookings] = useState([]);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null); // Add success state
   const [avatarUrl, setAvatarUrl] = useState("");
   const [avatarAlt, setAvatarAlt] = useState("");
   const [bio, setBio] = useState("");
@@ -30,7 +30,6 @@ const UserPage = () => {
   const [venuePrice, setVenuePrice] = useState("");
   const [venueMaxGuests, setVenueMaxGuests] = useState("");
 
-  // Fetch user profile and bookings
   useEffect(() => {
     const profileName = localStorage.getItem("name");
     if (profileName) {
@@ -40,7 +39,6 @@ const UserPage = () => {
     }
   }, []);
 
-  // Fetch user profile
   const fetchUserProfile = async (profileName) => {
     try {
       const userProfile = await FetchAPI(`holidaze/profiles/${profileName}`);
@@ -51,13 +49,11 @@ const UserPage = () => {
     }
   };
 
-  // Fetch user bookings
   const fetchUserBookings = async (profileName) => {
     try {
       const bookings = await FetchAPI(
-        `holidaze/profiles/${profileName}/bookings`,
-        "GET",
-        { _venue: true }
+        `holidaze/profiles/${profileName}/bookings?_venue=true`,
+        "GET"
       );
       setUserBookings(bookings.data || []);
     } catch (error) {
@@ -65,7 +61,6 @@ const UserPage = () => {
     }
   };
 
-  // Handle profile update
   const handleProfileUpdate = async (event) => {
     event.preventDefault();
     const profileName = localStorage.getItem("name");
@@ -95,7 +90,6 @@ const UserPage = () => {
     }
   };
 
-  // Handle venue creation form submission
   const handleVenueCreate = async (event) => {
     event.preventDefault();
 
@@ -123,9 +117,16 @@ const UserPage = () => {
     };
 
     try {
-      await FetchAPI("holidaze/venues", "POST", requestBody);
+      const response = await FetchAPI("holidaze/venues", "POST", requestBody);
+      setSuccess("Venue created successfully!");
+      setVenueName("");
+      setVenueLocation({ address: "", city: "", country: "" });
+      setVenueDescription("");
+      setVenueImage("");
+      setVenuePrice("");
+      setVenueMaxGuests("");
     } catch (error) {
-      setError(error.message);
+      setError(`Failed to create venue: ${error.message}`);
     }
   };
 
@@ -140,6 +141,7 @@ const UserPage = () => {
         <Row className="justify-content-center">
           <Col md={8} className="d-flex flex-column align-items-center">
             {error && <Alert variant="danger">Error: {error}</Alert>}
+            {success && <Alert variant="success">{success}</Alert>}
             <ProfileOverview userData={userData} />
             <ProfileUpdateForm
               avatarUrl={avatarUrl}
@@ -277,6 +279,7 @@ const VenueCreateForm = ({
           type="text"
           value={venueName}
           onChange={(e) => setVenueName(e.target.value)}
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -287,6 +290,7 @@ const VenueCreateForm = ({
           onChange={(e) =>
             setVenueLocation({ ...venueLocation, address: e.target.value })
           }
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -297,6 +301,7 @@ const VenueCreateForm = ({
           onChange={(e) =>
             setVenueLocation({ ...venueLocation, city: e.target.value })
           }
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -307,6 +312,7 @@ const VenueCreateForm = ({
           onChange={(e) =>
             setVenueLocation({ ...venueLocation, country: e.target.value })
           }
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -315,6 +321,7 @@ const VenueCreateForm = ({
           as="textarea"
           value={venueDescription}
           onChange={(e) => setVenueDescription(e.target.value)}
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -323,6 +330,7 @@ const VenueCreateForm = ({
           type="text"
           value={venueImage}
           onChange={(e) => setVenueImage(e.target.value)}
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -331,6 +339,7 @@ const VenueCreateForm = ({
           type="number"
           value={venuePrice}
           onChange={(e) => setVenuePrice(e.target.value)}
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -339,6 +348,7 @@ const VenueCreateForm = ({
           type="number"
           value={venueMaxGuests}
           onChange={(e) => setVenueMaxGuests(e.target.value)}
+          required
         />
       </Form.Group>
       <div className="d-flex justify-content-center">

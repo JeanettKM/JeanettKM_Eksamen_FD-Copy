@@ -7,29 +7,26 @@ import FetchAPI from "../API/FetchAPI";
 import "react-calendar/dist/Calendar.css";
 
 const VenueDetail = () => {
-  // Create the unique id for the venue
   const { id } = useParams();
   const [venue, setVenue] = useState(null);
   const [error, setError] = useState(null);
   const [bookingError, setBookingError] = useState(null);
+  const [bookingSuccess, setBookingSuccess] = useState(null); // Add success state
   const [dates, setDates] = useState([new Date(), new Date()]);
   const [guests, setGuests] = useState(1);
   const [bookedDates, setBookedDates] = useState([]);
 
   useEffect(() => {
-    // Fetching venue data from the API
     const fetchVenueData = async () => {
       try {
         const data = await FetchAPI(`holidaze/venues/${id}`, "GET", {
           _owner: true,
           _bookings: true,
         });
-        // Checking if valid data is received
         if (data && data.data) {
           console.log("Venue data:", data.data);
           setVenue(data.data);
 
-          // Getting booked dates
           const bookings = data.data.bookings || [];
           const dates = bookings.flatMap((booking) => {
             const startDate = new Date(booking.dateFrom);
@@ -44,7 +41,6 @@ const VenueDetail = () => {
           });
           setBookedDates(dates);
         } else {
-          // Logging an error message if error occurs
           console.error("Invalid data received:", data);
         }
       } catch (error) {
@@ -56,7 +52,6 @@ const VenueDetail = () => {
     fetchVenueData();
   }, [id]);
 
-  // Function to handle booking
   const handleBooking = async () => {
     try {
       const [startDate, endDate] = dates;
@@ -77,6 +72,8 @@ const VenueDetail = () => {
       if (response) {
         console.log("Booking successful!", response);
         setBookingError(null);
+        setBookingSuccess("Venue booked successfully!"); // Set success message
+
         const newBookedDates = [];
         let currentDate = new Date(formattedStartDate);
         while (currentDate <= new Date(formattedEndDate)) {
@@ -86,6 +83,8 @@ const VenueDetail = () => {
         setBookedDates([...bookedDates, ...newBookedDates]);
       } else {
         console.error("Booking failed:", response);
+        setBookingError("Failed to book the venue.");
+        setBookingSuccess(null); // Clear success message
       }
     } catch (error) {
       if (error.message.includes("409")) {
@@ -98,10 +97,10 @@ const VenueDetail = () => {
           "An error occurred while trying to book. Please try again."
         );
       }
+      setBookingSuccess(null); // Clear success message
     }
   };
 
-  // Gray out the booked dates in the calendar
   const tileDisabled = ({ date, view }) => {
     if (view === "month") {
       const isDisabled = bookedDates.some(
@@ -113,11 +112,9 @@ const VenueDetail = () => {
     return false;
   };
 
-  // Display a loading message
   if (error) return <div>Error: {error}</div>;
   if (!venue) return <div>Loading...</div>;
 
-  // Displaying the venue details
   return (
     <div id="venue-div">
       <Card.Body>
@@ -180,6 +177,7 @@ const VenueDetail = () => {
           />
         </div>
         {bookingError && <p className="text-danger">{bookingError}</p>}
+        {bookingSuccess && <p className="text-success">{bookingSuccess}</p>}
         <Button variant="primary" onClick={handleBooking}>
           Book Now
         </Button>
@@ -188,7 +186,6 @@ const VenueDetail = () => {
   );
 };
 
-// Card component from react-bootstrap for displaying venue details
 function HeaderAndFooterExample() {
   return (
     <Card className="text-center">
