@@ -4,9 +4,9 @@
 
 ## Description
 
-The goal of this project is to develop a modern front-end accommodation booking application for Holidaze, a newly launched accommodation booking site. I will be achieving this by using what I've learned through my two years of education.
+The goal of this project is to develop a modern front-end accommodation booking application for a made up company called Holidaze, a newly launched accommodation booking site. I will be achieving this by using what I've learned through my two years of education.
 
-Holidaze has approached us to develop a brand new front-end for their application. The project involves creating both customer-facing and admin-facing interfaces, allowing users to book holidays at venues and enabling venue managers to manage their venues and bookings.
+Holidaze has approached us/the firm to develop a brand new front-end for their application. The project involves creating both customer-facing and admin-facing interfaces, allowing users to book holidays at venues and enabling venue managers to manage their venues and bookings.
 
 <br>
 
