@@ -22,6 +22,8 @@ Holidaze has approached us to develop a brand new front-end for their applicatio
 
 <img align="left" alt="React" width="30px" style="padding-right:10px;" src="https://raw.githubusercontent.com/devicons/devicon/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/react/react-original.svg"/>**React**
 
+<img align="left" alt="Bootstrap" width="30px" style="padding-right:10px;" src="[https://raw.githubusercontent.com/devicons/devicon/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/bootstrap/bootstrap-original.svg](https://raw.githubusercontent.com/devicons/devicon/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/vite/vite-original-wordmark.svg)"/> **Vite**
+
 <img align="left" alt="Bootstrap" width="30px" style="padding-right:10px;" src="https://raw.githubusercontent.com/devicons/devicon/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/bootstrap/bootstrap-original.svg"/> **Bootstrap**
 
 <br clear="left"/>
