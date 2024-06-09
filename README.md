@@ -114,4 +114,9 @@ Jeanett K. Melsom - [LinkedIn](https://www.linkedin.com/in/jeanett-melsom-927ab4
 
 ## License
 
-This project is licensed under the [License Name]. See the LICENSE file for details.
+This projest is not under any license
+
+## Acknowledgments
+
+I used Bootswatch free themes for bootstrap:  [Bootswatch](https://bootswatch.com/)
+
