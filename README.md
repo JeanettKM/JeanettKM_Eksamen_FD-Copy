@@ -10,6 +10,20 @@ Holidaze has approached us to develop a brand new front-end for their applicatio
 
 <br>
 
+### Features
+
+- View and search in a list of Venues
+- View a specific Venue page by ID
+- View a calendar with available dates for a Venue
+- Register and log in as a customer (requires stud.noroff.no email)
+- Create and view a booking at a Venue (registered customers)
+- Register and log in as a Venue manager (requires stud.noroff.no email)
+- Create, update and delete a Venue (registered Venue managers)
+- Update avatar (registered users)
+- Authentication implementation
+
+<br>
+
 ## Built With
 
 <img align="left" alt="JavaScript" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"/>**JavaScript**
