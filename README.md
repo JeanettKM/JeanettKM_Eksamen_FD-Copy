@@ -42,6 +42,35 @@ Holidaze has approached us/the firm to develop a brand new front-end for their a
 
 <br clear="left"/>
 
+## Getting started
+
+### Installing
+
+To set up and run the project you can follow these few steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/JeanettKM/JeanettKM_Eksamen_FD-Copy.git
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+### Running
+
+Run the development server:
+
+   ```bash
+   npm start
+   ```
+
+<br>
+
+
 ## Requirements
 
 This project covers the front-end application for the Holidaze API. All API functionality is managed by an existing application provided by Noroff.
@@ -67,36 +96,6 @@ This project covers the front-end application for the Holidaze API. All API func
 
 - Trello Board:
   [Project Planner](https://trello.com/invite/b/HoQacdib/ATTI76e170ed335e68f89a53e2f42677faec43CC9A2B/jeanett-k-melsom-exam-project-planner-for-public)
-
-<br>
-
-## Delivery
-
-Ensure all final changes are merged into the default branch (main or master) before delivery. Include the required links in the Moodle delivery window using the provided template format. The readme.md file should describe the project thoroughly, including setup and usage instructions, as well as any special instructions for testers.
-
-<br>
-
-## Setup and Usage
-
-To set up and run the project locally, follow these steps:
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/JeanettKM/JeanettKM_Eksamen_FD-Copy.git
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Run the development server:
-
-   ```bash
-   npm start
-   ```
 
 <br>
 
