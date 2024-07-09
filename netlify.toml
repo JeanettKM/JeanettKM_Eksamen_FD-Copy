@@ -8,5 +8,4 @@
   to = "/index.html"
   status = 200
 
-[post_processing]
-  skip_processing = true
+
