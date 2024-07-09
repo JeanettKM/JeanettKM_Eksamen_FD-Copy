@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "cd \"/Users/jeanettmelsom/Desktop/Projects from course/JeanettKM_Eksamen_FD-Copy/Frontend-Dev Eksamen 2\" && vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "vite preview"
