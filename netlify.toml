@@ -1,7 +1,7 @@
 [build]
-  base = "JeanettKM_Eksamen_FD-Copy/Frontend-Dev Eksamen 2"
+  base = "Frontend-Dev Eksamen 2"
   command = "npm run build"
-  publish = "Frontend-Dev Eksamen 2/dist"
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
