@@ -1,5 +1,4 @@
 [build]
-  base = "Frontend-Dev Eksamen 2"
   command = "npm run build"
   publish = "Frontend-Dev Eksamen 2/dist"
 
