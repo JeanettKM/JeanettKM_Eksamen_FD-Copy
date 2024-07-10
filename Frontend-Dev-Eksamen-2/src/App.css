@@ -151,6 +151,32 @@ div.jumbotron {
   color: var(--text-color);
 }
 
+#bookings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+.UpcomingBookings {
+  padding-top: 25px;
+  font-weight: 300;
+  padding-bottom: 10px;
+}
+
+.booking-container {
+  flex: -moz-available;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  text-align: center;
+}
+
 #VenueFeatures {
   display: flex;
   flex-wrap: wrap;
@@ -648,4 +674,13 @@ button,
 .show-more {
   max-height: none;
   overflow: visible;
+}
+
+#bookings p {
+  margin-bottom: 2px;
+}
+
+.bookingsText {
+  margin-top: 15px;
+  font-size: 12px;
 }

@@ -15,7 +15,7 @@ const UserPage = () => {
   const [userData, setUserData] = useState(null);
   const [userBookings, setUserBookings] = useState([]);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null); // Add success state
+  const [success, setSuccess] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState("");
   const [avatarAlt, setAvatarAlt] = useState("");
   const [bio, setBio] = useState("");
@@ -29,7 +29,8 @@ const UserPage = () => {
   const [venueImage, setVenueImage] = useState("");
   const [venuePrice, setVenuePrice] = useState("");
   const [venueMaxGuests, setVenueMaxGuests] = useState("");
-  const [isVenueFormVisible, setIsVenueFormVisible] = useState(false); // State to manage form visibility
+  const [isVenueFormVisible, setIsVenueFormVisible] = useState(false);
+  const [isProfileFormVisible, setIsProfileFormVisible] = useState(false); // Add state for profile form visibility
 
   useEffect(() => {
     const profileName = localStorage.getItem("name");
@@ -126,8 +127,8 @@ const UserPage = () => {
       setVenueImage("");
       setVenuePrice("");
       setVenueMaxGuests("");
-      setIsVenueFormVisible(false); // Hide the form upon successful creation
-      window.location.reload(); // Refresh the page
+      setIsVenueFormVisible(false);
+      window.location.reload();
     } catch (error) {
       setError(`Failed to create venue: ${error.message}`);
     }
@@ -145,43 +146,36 @@ const UserPage = () => {
           <Col md={8} className="d-flex flex-column align-items-center">
             {error && <Alert variant="danger">Error: {error}</Alert>}
             {success && <Alert variant="success">{success}</Alert>}
-            <ProfileOverview userData={userData} />
-            <ProfileUpdateForm
-              avatarUrl={avatarUrl}
-              setAvatarUrl={setAvatarUrl}
-              avatarAlt={avatarAlt}
-              setAvatarAlt={setAvatarAlt}
-              bio={bio}
-              setBio={setBio}
-              handleProfileUpdate={handleProfileUpdate}
+            <ProfileOverview
+              userData={userData}
+              setIsVenueFormVisible={setIsVenueFormVisible}
+              isVenueFormVisible={isVenueFormVisible}
+              venueName={venueName}
+              setVenueName={setVenueName}
+              venueLocation={venueLocation}
+              setVenueLocation={setVenueLocation}
+              venueDescription={venueDescription}
+              setVenueDescription={setVenueDescription}
+              venueImage={venueImage}
+              setVenueImage={setVenueImage}
+              venuePrice={venuePrice}
+              setVenuePrice={setVenuePrice}
+              venueMaxGuests={venueMaxGuests}
+              setVenueMaxGuests={setVenueMaxGuests}
+              handleVenueCreate={handleVenueCreate}
+              isProfileFormVisible={isProfileFormVisible}
+              setIsProfileFormVisible={setIsProfileFormVisible}
             />
-            {userData?.venueManager && (
-              <>
-                <Button
-                  variant="primary"
-                  className="mt-4"
-                  onClick={() => setIsVenueFormVisible(!isVenueFormVisible)}
-                >
-                  {isVenueFormVisible ? "Hide Venue Form" : "Create New Venue"}
-                </Button>
-                {isVenueFormVisible && (
-                  <VenueCreateForm
-                    venueName={venueName}
-                    setVenueName={setVenueName}
-                    venueLocation={venueLocation}
-                    setVenueLocation={setVenueLocation}
-                    venueDescription={venueDescription}
-                    setVenueDescription={setVenueDescription}
-                    venueImage={venueImage}
-                    setVenueImage={setVenueImage}
-                    venuePrice={venuePrice}
-                    setVenuePrice={setVenuePrice}
-                    venueMaxGuests={venueMaxGuests}
-                    setVenueMaxGuests={setVenueMaxGuests}
-                    handleVenueCreate={handleVenueCreate}
-                  />
-                )}
-              </>
+            {isProfileFormVisible && (
+              <ProfileUpdateForm
+                avatarUrl={avatarUrl}
+                setAvatarUrl={setAvatarUrl}
+                avatarAlt={avatarAlt}
+                setAvatarAlt={setAvatarAlt}
+                bio={bio}
+                setBio={setBio}
+                handleProfileUpdate={handleProfileUpdate}
+              />
             )}
             <UpcomingBookings userBookings={userBookings} />
           </Col>
@@ -191,9 +185,28 @@ const UserPage = () => {
   );
 };
 
-const ProfileOverview = ({ userData }) => (
+const ProfileOverview = ({
+  userData,
+  setIsVenueFormVisible,
+  isVenueFormVisible,
+  venueName,
+  setVenueName,
+  venueLocation,
+  setVenueLocation,
+  venueDescription,
+  setVenueDescription,
+  venueImage,
+  setVenueImage,
+  venuePrice,
+  setVenuePrice,
+  venueMaxGuests,
+  setVenueMaxGuests,
+  handleVenueCreate,
+  isProfileFormVisible,
+  setIsProfileFormVisible,
+}) => (
   <>
-    <h2 className="text-center mb-4">Profile Overview</h2>
+    <h2 className="text-center mb-4">Profile page</h2>
     {userData && (
       <div className="text-center w-100">
         {userData.avatar && (
@@ -219,6 +232,41 @@ const ProfileOverview = ({ userData }) => (
         <p className="text-center">
           Number of Bookings: {userData._count?.bookings || 0}
         </p>
+        <Button
+          variant="primary"
+          className="mt-4"
+          onClick={() => setIsProfileFormVisible(!isProfileFormVisible)}
+        >
+          {isProfileFormVisible ? "Hide Profile Form" : "Update Profile"}
+        </Button>
+        {userData.venueManager && (
+          <>
+            <Button
+              variant="primary"
+              className="mt-4"
+              onClick={() => setIsVenueFormVisible(!isVenueFormVisible)}
+            >
+              {isVenueFormVisible ? "Hide Venue Form" : "Create New Venue"}
+            </Button>
+            {isVenueFormVisible && (
+              <VenueCreateForm
+                venueName={venueName}
+                setVenueName={setVenueName}
+                venueLocation={venueLocation}
+                setVenueLocation={setVenueLocation}
+                venueDescription={venueDescription}
+                setVenueDescription={setVenueDescription}
+                venueImage={venueImage}
+                setVenueImage={setVenueImage}
+                venuePrice={venuePrice}
+                setVenuePrice={setVenuePrice}
+                venueMaxGuests={venueMaxGuests}
+                setVenueMaxGuests={setVenueMaxGuests}
+                handleVenueCreate={handleVenueCreate}
+              />
+            )}
+          </>
+        )}
       </div>
     )}
   </>
@@ -376,18 +424,19 @@ const VenueCreateForm = ({
 
 const UpcomingBookings = ({ userBookings }) => (
   <>
-    <h3 className="text-center mt-4">Upcoming Bookings</h3>
+    <h3 className="UpcomingBookings text-center mt-4">Upcoming Bookings</h3>
     {userBookings.length > 0 ? (
-      <ul className="list-unstyled text-center w-100">
-        {userBookings.map((booking) => (
-          <li key={booking.id} className="mb-3">
-            <p>Venue: {booking.venue ? booking.venue.name : "Unknown Venue"}</p>
-            <p>From: {new Date(booking.dateFrom).toLocaleDateString()}</p>
-            <p>To: {new Date(booking.dateTo).toLocaleDateString()}</p>
-            <p>Guests: {booking.guests}</p>
-          </li>
+      <div id="bookings">
+        {userBookings.map((booking, index) => (
+          <div key={booking.id} className="booking-container">
+            <h4>{booking.venue ? booking.venue.name : "Unknown Venue"}</h4>
+            <div className="bookingsText">
+              <p>From: {new Date(booking.dateFrom).toLocaleDateString()}</p>
+              <p>To: {new Date(booking.dateTo).toLocaleDateString()}</p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     ) : (
       <p className="text-center">No upcoming bookings.</p>
     )}
