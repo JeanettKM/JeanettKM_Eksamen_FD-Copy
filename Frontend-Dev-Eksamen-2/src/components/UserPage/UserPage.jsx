@@ -29,6 +29,7 @@ const UserPage = () => {
   const [venueImage, setVenueImage] = useState("");
   const [venuePrice, setVenuePrice] = useState("");
   const [venueMaxGuests, setVenueMaxGuests] = useState("");
+  const [isVenueFormVisible, setIsVenueFormVisible] = useState(false); // State to manage form visibility
 
   useEffect(() => {
     const profileName = localStorage.getItem("name");
@@ -125,6 +126,8 @@ const UserPage = () => {
       setVenueImage("");
       setVenuePrice("");
       setVenueMaxGuests("");
+      setIsVenueFormVisible(false); // Hide the form upon successful creation
+      window.location.reload(); // Refresh the page
     } catch (error) {
       setError(`Failed to create venue: ${error.message}`);
     }
@@ -153,21 +156,32 @@ const UserPage = () => {
               handleProfileUpdate={handleProfileUpdate}
             />
             {userData?.venueManager && (
-              <VenueCreateForm
-                venueName={venueName}
-                setVenueName={setVenueName}
-                venueLocation={venueLocation}
-                setVenueLocation={setVenueLocation}
-                venueDescription={venueDescription}
-                setVenueDescription={setVenueDescription}
-                venueImage={venueImage}
-                setVenueImage={setVenueImage}
-                venuePrice={venuePrice}
-                setVenuePrice={setVenuePrice}
-                venueMaxGuests={venueMaxGuests}
-                setVenueMaxGuests={setVenueMaxGuests}
-                handleVenueCreate={handleVenueCreate}
-              />
+              <>
+                <Button
+                  variant="primary"
+                  className="mt-4"
+                  onClick={() => setIsVenueFormVisible(!isVenueFormVisible)}
+                >
+                  {isVenueFormVisible ? "Hide Venue Form" : "Create New Venue"}
+                </Button>
+                {isVenueFormVisible && (
+                  <VenueCreateForm
+                    venueName={venueName}
+                    setVenueName={setVenueName}
+                    venueLocation={venueLocation}
+                    setVenueLocation={setVenueLocation}
+                    venueDescription={venueDescription}
+                    setVenueDescription={setVenueDescription}
+                    venueImage={venueImage}
+                    setVenueImage={setVenueImage}
+                    venuePrice={venuePrice}
+                    setVenuePrice={setVenuePrice}
+                    venueMaxGuests={venueMaxGuests}
+                    setVenueMaxGuests={setVenueMaxGuests}
+                    handleVenueCreate={handleVenueCreate}
+                  />
+                )}
+              </>
             )}
             <UpcomingBookings userBookings={userBookings} />
           </Col>

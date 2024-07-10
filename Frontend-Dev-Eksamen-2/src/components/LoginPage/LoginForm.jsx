@@ -66,9 +66,23 @@ const LoginForm = () => {
     }
   };
 
+  // Function to set test user credentials
+  const setTestUser = () => {
+    setEmail("Testjkm@stud.noroff.no");
+    setPassword("Abcd1234");
+  };
+
   return (
     <div>
       <br />
+      {/* Button to set test user credentials */}
+      <Button
+        variant="secondary"
+        className="custom-test-user-button"
+        onClick={setTestUser}
+      >
+        Fill Test User
+      </Button>
       <Form>
         <div className="inputWidth">
           {/* Email Input */}

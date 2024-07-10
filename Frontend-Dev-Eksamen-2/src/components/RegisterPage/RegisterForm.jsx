@@ -11,7 +11,7 @@ const RegisterForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [venueManager, setVenueManager] = useState(false); // State for venue manager checkbox
+  const [venueManager, setVenueManager] = useState(false);
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");

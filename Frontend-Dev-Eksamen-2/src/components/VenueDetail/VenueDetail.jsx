@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -11,10 +11,13 @@ const VenueDetail = () => {
   const [venue, setVenue] = useState(null);
   const [error, setError] = useState(null);
   const [bookingError, setBookingError] = useState(null);
-  const [bookingSuccess, setBookingSuccess] = useState(null); // Add success state
+  const [bookingSuccess, setBookingSuccess] = useState(null);
   const [dates, setDates] = useState([new Date(), new Date()]);
   const [guests, setGuests] = useState(1);
   const [bookedDates, setBookedDates] = useState([]);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const textRef = useRef(null);
 
   useEffect(() => {
     const fetchVenueData = async () => {
@@ -52,6 +55,14 @@ const VenueDetail = () => {
     fetchVenueData();
   }, [id]);
 
+  useEffect(() => {
+    if (textRef.current) {
+      const isTextOverflowing =
+        textRef.current.scrollHeight > textRef.current.clientHeight;
+      setIsOverflowing(isTextOverflowing);
+    }
+  }, [venue]);
+
   const handleBooking = async () => {
     try {
       const [startDate, endDate] = dates;
@@ -72,7 +83,7 @@ const VenueDetail = () => {
       if (response) {
         console.log("Booking successful!", response);
         setBookingError(null);
-        setBookingSuccess("Venue booked successfully!"); // Set success message
+        setBookingSuccess("Venue booked successfully!");
 
         const newBookedDates = [];
         let currentDate = new Date(formattedStartDate);
@@ -84,7 +95,7 @@ const VenueDetail = () => {
       } else {
         console.error("Booking failed:", response);
         setBookingError("Failed to book the venue.");
-        setBookingSuccess(null); // Clear success message
+        setBookingSuccess(null);
       }
     } catch (error) {
       if (error.message.includes("409")) {
@@ -97,7 +108,7 @@ const VenueDetail = () => {
           "An error occurred while trying to book. Please try again."
         );
       }
-      setBookingSuccess(null); // Clear success message
+      setBookingSuccess(null);
     }
   };
 
@@ -110,6 +121,10 @@ const VenueDetail = () => {
       return isDisabled;
     }
     return false;
+  };
+
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
   };
 
   if (error) return <div>Error: {error}</div>;
@@ -130,7 +145,21 @@ const VenueDetail = () => {
             <p>No image available</p>
           )}
         </div>
-        <Card.Text>{venue.description}</Card.Text>
+        <div className="card-text" ref={textRef}>
+          <div className={`read-more-content ${isExpanded ? "show-more" : ""}`}>
+            <p>{venue.description}</p>
+          </div>
+          {!isExpanded && (
+            <span className="read-more" onClick={toggleReadMore}>
+              Read more
+            </span>
+          )}
+          {isExpanded && (
+            <span className="read-less" onClick={toggleReadMore}>
+              Read less
+            </span>
+          )}
+        </div>
         <div className="detailsText">
           <p>Price: {venue.price}</p>
           <p>Max Guests: {venue.maxGuests}</p>
@@ -149,13 +178,13 @@ const VenueDetail = () => {
               <p>Pets: {venue.meta?.pets ? "Yes" : "No"}</p>
               <p>Parking: {venue.meta?.parking ? "Yes" : "No"}</p>
             </div>
+            <div id="VenueCounter">
+              <p>Previous bookings: {venue._count?.bookings || 0}</p>
+            </div>
           </div>
           <hr className="my-4" />
-          <div id="VenueCounter">
-            <p>Number of Bookings: {venue._count?.bookings || 0}</p>
-          </div>
         </div>
-        <div>
+        <div className="bookingCalendar">
           <h5>Select your dates:</h5>
           <Calendar
             selectRange
@@ -164,7 +193,7 @@ const VenueDetail = () => {
             tileDisabled={tileDisabled}
           />
         </div>
-        <div>
+        <div className="NumberOfGuests">
           <br />
           <label htmlFor="guests">Number of Guests:</label>
           <input
