@@ -80,6 +80,7 @@ const LoginForm = () => {
         variant="secondary"
         className="custom-test-user-button"
         onClick={setTestUser}
+        style={{ borderRadius: "1px" }}
       >
         Fill Test User
       </Button>

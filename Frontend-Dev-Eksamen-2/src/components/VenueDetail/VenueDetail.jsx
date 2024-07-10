@@ -15,8 +15,6 @@ const VenueDetail = () => {
   const [dates, setDates] = useState([new Date(), new Date()]);
   const [guests, setGuests] = useState(1);
   const [bookedDates, setBookedDates] = useState([]);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isOverflowing, setIsOverflowing] = useState(false);
   const textRef = useRef(null);
 
   useEffect(() => {
@@ -54,14 +52,6 @@ const VenueDetail = () => {
 
     fetchVenueData();
   }, [id]);
-
-  useEffect(() => {
-    if (textRef.current) {
-      const isTextOverflowing =
-        textRef.current.scrollHeight > textRef.current.clientHeight;
-      setIsOverflowing(isTextOverflowing);
-    }
-  }, [venue]);
 
   const handleBooking = async () => {
     try {
@@ -123,10 +113,6 @@ const VenueDetail = () => {
     return false;
   };
 
-  const toggleReadMore = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   if (error) return <div>Error: {error}</div>;
   if (!venue) return <div>Loading...</div>;
 
@@ -146,19 +132,7 @@ const VenueDetail = () => {
           )}
         </div>
         <div className="card-text" ref={textRef}>
-          <div className={`read-more-content ${isExpanded ? "show-more" : ""}`}>
-            <p>{venue.description}</p>
-          </div>
-          {!isExpanded && (
-            <span className="read-more" onClick={toggleReadMore}>
-              Read more
-            </span>
-          )}
-          {isExpanded && (
-            <span className="read-less" onClick={toggleReadMore}>
-              Read less
-            </span>
-          )}
+          <p>{venue.description}</p>
         </div>
         <div className="detailsText">
           <p>Price: {venue.price}</p>

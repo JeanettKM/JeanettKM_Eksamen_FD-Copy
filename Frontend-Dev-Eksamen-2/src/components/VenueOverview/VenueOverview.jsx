@@ -4,7 +4,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FetchAPI from "../API/FetchAPI";
-import { InputGroup, Form, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import SearchBar from "../SearchBar";
 
 const VenueOverview = () => {
   // State variables
@@ -17,6 +18,10 @@ const VenueOverview = () => {
   useEffect(() => {
     loadVenues();
   }, []);
+
+  useEffect(() => {
+    handleSearch(searchQuery);
+  }, [searchQuery]);
 
   // Load venues from the API
   const loadVenues = async () => {
@@ -34,34 +39,27 @@ const VenueOverview = () => {
     }
   };
 
+  // Helper function to convert venue object to searchable string
+  const venueToString = (venue) => {
+    return JSON.stringify(venue).toLowerCase();
+  };
+
   // Search functionality
-  const handleSearch = async () => {
-    if (!searchQuery.trim()) {
-      // If search query is empty, load all venues
-      loadVenues();
+  const handleSearch = (query) => {
+    if (!query.trim()) {
+      // If search query is empty, show all venues
+      setDisplayedVenues(venues.slice(0, itemsPerPage));
       return;
     }
 
-    try {
-      const data = await FetchAPI(`holidaze/venues/search?q=${searchQuery}`);
-      console.log("Searched venues data:", data);
-      if (data && Array.isArray(data.data)) {
-        setDisplayedVenues(data.data.slice(0, itemsPerPage));
-        setCurrentPage(1);
-      } else {
-        console.error("Error while searching venues:", data);
-      }
-    } catch (error) {
-      console.error("Error searching venues:", error);
-    }
+    const filteredVenues = venues.filter((venue) => {
+      return venueToString(venue).includes(query.toLowerCase());
+    });
+    setDisplayedVenues(filteredVenues.slice(0, itemsPerPage));
+    setCurrentPage(1);
   };
 
-  // Handle changes in the search field
-  const handleChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
-
-  // load more venues btn
+  // Load more venues btn
   const loadMoreVenues = () => {
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -80,24 +78,8 @@ const VenueOverview = () => {
         <p className="lead text-secondary">
           Can you find the perfect venue for your next event?
         </p>
-        <InputGroup className="mb-3 searchField">
-          <Form.Control
-            type="text"
-            placeholder="Search venues by name or description..."
-            aria-label="Search"
-            aria-describedby="inputGroup-sizing-default"
-            value={searchQuery}
-            onChange={handleChange}
-          />
-          <Button
-            className="searchBtn"
-            variant="primary"
-            type="button"
-            onClick={handleSearch}
-          >
-            Search
-          </Button>
-        </InputGroup>
+        <SearchBar onSearch={setSearchQuery} />{" "}
+        {/* Use the SearchBar component */}
         <hr className="my-4" />
         <Container className="VenueContainer">
           <Row xs={1} md={2} lg={3} className="g-4">

@@ -25,9 +25,20 @@ function VenueCard({ venue }) {
         alt={firstImageAlt}
         className="card-img-top"
       />
-      <Card.Body style={{ height: "100px", overflow: "hidden" }}>
+      <Card.Body style={{ height: "150px" }}>
         <Card.Title>{venue.name}</Card.Title>
-        <Card.Text className="card-text">{venue.description}</Card.Text>
+        <Card.Text
+          id="cardDescription"
+          style={{
+            height: "150px",
+            overflowY: "scroll",
+            paddingBottom: "70px",
+            textAlign: "center",
+            marginTop: "15px",
+          }}
+        >
+          {venue.description}
+        </Card.Text>
       </Card.Body>
       <ListGroup
         className="list-group-flush"

@@ -30,7 +30,7 @@ const UserPage = () => {
   const [venuePrice, setVenuePrice] = useState("");
   const [venueMaxGuests, setVenueMaxGuests] = useState("");
   const [isVenueFormVisible, setIsVenueFormVisible] = useState(false);
-  const [isProfileFormVisible, setIsProfileFormVisible] = useState(false); // Add state for profile form visibility
+  const [isProfileFormVisible, setIsProfileFormVisible] = useState(false);
 
   useEffect(() => {
     const profileName = localStorage.getItem("name");

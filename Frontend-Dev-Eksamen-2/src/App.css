@@ -1,3 +1,5 @@
+/* App.css */
+
 /* General Styles */
 html,
 body {
@@ -19,6 +21,18 @@ body {
   .d-flex {
     justify-content: center;
     margin-top: 30px;
+  }
+
+  .overViewText {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 30px;
+  }
+
+  #cardDescription {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
   }
 
   .me-auto {
@@ -112,7 +126,7 @@ body {
 .detailsText {
   text-align: start;
   font-size: 14px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 #VenueFeatures,
@@ -441,7 +455,7 @@ body {
 .detailsText {
   text-align: start;
   font-size: 14px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 #VenueFeatures,
@@ -651,8 +665,12 @@ button,
 
 .card-text {
   margin: auto;
-  width: 80%;
   font-weight: 300;
+  text-align: left;
+  font-size: 14px;
+  height: 100px;
+  overflow-y: scroll;
+  margin-bottom: 20px;
 }
 
 .read-more-content {
