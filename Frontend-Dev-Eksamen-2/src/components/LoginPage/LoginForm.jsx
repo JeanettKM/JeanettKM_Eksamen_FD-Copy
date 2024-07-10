@@ -1,9 +1,7 @@
-// LoginForm.jsx
-
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser, createApiKey } from "../API/AuthAPI";
 
 const LoginForm = () => {
@@ -13,6 +11,8 @@ const LoginForm = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [apiError, setApiError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -54,7 +54,7 @@ const LoginForm = () => {
         console.log("Login successful!");
 
         // Redirect to the venues page if successfully logged in
-        window.location.href = "/venues";
+        navigate("/venues");
       } else if (response && response.errors && response.errors.length > 0) {
         // Display and render API error message if any errors are present
         setApiError(response.errors[0].message);

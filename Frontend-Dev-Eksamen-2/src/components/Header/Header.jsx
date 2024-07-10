@@ -1,12 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     // Clear all stored data in local storage
     localStorage.clear();
-    // Reload the page
-    window.location.reload();
+    // Redirect to the login page
+    navigate("/login");
   };
 
   // Check if user is logged in by checking if accessToken exists in local storage
